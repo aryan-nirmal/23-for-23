@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "Cold Email Personalizer",
+  "version": "0.1.0",
+  "description": "Generate personalized cold emails from LinkedIn and Gmail context with local-first settings.",
+  "permissions": ["storage", "activeTab", "scripting", "sidePanel"],
+  "host_permissions": [
+    "https://www.linkedin.com/*",
+    "https://linkedin.com/*",
+    "https://mail.google.com/*",
+    "https://openrouter.ai/*"
+  ],
+  "background": {
+    "service_worker": "assets/background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "Cold Email Personalizer",
+    "default_popup": "popup.html"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": ["https://www.linkedin.com/*", "https://linkedin.com/*"],
+      "js": ["assets/linkedin.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://mail.google.com/*"],
+      "js": ["assets/gmail.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

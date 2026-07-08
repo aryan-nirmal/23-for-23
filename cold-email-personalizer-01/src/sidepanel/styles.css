@@ -1,0 +1,240 @@
+:root {
+  color-scheme: light;
+  font-family: "IBM Plex Sans", "Avenir Next", "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(236, 124, 48, 0.16), transparent 24%),
+    radial-gradient(circle at top right, rgba(21, 118, 99, 0.12), transparent 18%),
+    linear-gradient(180deg, #f7f2e8 0%, #f5f7fb 100%);
+  color: #14212d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.shell {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 100vh;
+  padding: 18px;
+}
+
+.hero,
+.panel,
+.statusCard {
+  border: 1px solid rgba(20, 33, 45, 0.08);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 40px rgba(20, 33, 45, 0.08);
+}
+
+.hero {
+  padding: 18px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: #b75519;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin: 0 0 10px;
+  font-family: "Iowan Old Style", "Georgia", serif;
+  font-size: 28px;
+  line-height: 1.1;
+}
+
+.subtle {
+  margin: 0;
+  color: #5e6975;
+}
+
+.statusCard,
+.panel {
+  padding: 16px;
+}
+
+.statusCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.panelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.panelHeader h2,
+.panelHeader h3 {
+  margin: 0;
+}
+
+label {
+  display: block;
+  margin-bottom: 12px;
+  color: #324354;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  margin-top: 6px;
+  border: 1px solid rgba(50, 67, 84, 0.14);
+  border-radius: 14px;
+  background: #fffdf9;
+  padding: 12px 13px;
+  color: #152230;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 8px 0 16px;
+}
+
+.primaryButton,
+.secondaryButton,
+.dangerButton,
+.textButton {
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition: transform 120ms ease, opacity 120ms ease;
+}
+
+.primaryButton:hover,
+.secondaryButton:hover,
+.dangerButton:hover,
+.textButton:hover {
+  transform: translateY(-1px);
+}
+
+.primaryButton:disabled,
+.secondaryButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.primaryButton {
+  background: linear-gradient(135deg, #0f766e, #1d4ed8);
+  color: white;
+  padding: 11px 16px;
+}
+
+.secondaryButton {
+  background: #f0f4fa;
+  color: #203243;
+  padding: 11px 16px;
+}
+
+.dangerButton {
+  background: #fff1ef;
+  color: #b93828;
+  padding: 9px 14px;
+}
+
+.textButton {
+  background: transparent;
+  color: inherit;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 0;
+  text-align: left;
+}
+
+.miniSettings {
+  margin-top: 12px;
+  border-top: 1px solid rgba(20, 33, 45, 0.08);
+  padding-top: 14px;
+}
+
+.miniSettings h3,
+.rationale h3 {
+  margin: 0 0 10px;
+}
+
+.savedList {
+  margin-top: 12px;
+}
+
+.savedItem {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  border-top: 1px solid rgba(20, 33, 45, 0.08);
+  padding: 10px 0;
+}
+
+.savedItem span {
+  color: #647384;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.summary {
+  margin: 0;
+  border-radius: 14px;
+  background: #f2f7ff;
+  padding: 12px;
+  color: #284868;
+}
+
+.draftPanel {
+  margin-bottom: 8px;
+}
+
+.rationale {
+  margin-top: 12px;
+  border-top: 1px solid rgba(20, 33, 45, 0.08);
+  padding-top: 14px;
+}
+
+.rationale p {
+  margin: 0 0 8px;
+  color: #425466;
+}
+
+.footerStatus {
+  padding: 0 4px 18px;
+  color: #425466;
+  font-size: 13px;
+}

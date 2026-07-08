@@ -1,0 +1,53 @@
+:root {
+  font-family: "IBM Plex Sans", "Avenir Next", sans-serif;
+  background: linear-gradient(180deg, #fff7ef 0%, #eef6ff 100%);
+  color: #162533;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+.popupShell {
+  padding: 18px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: #b75519;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0 0 14px;
+  font-family: "Iowan Old Style", "Georgia", serif;
+  font-size: 22px;
+  line-height: 1.15;
+}
+
+.card {
+  border: 1px solid rgba(22, 37, 51, 0.1);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 14px;
+}
+
+.card p,
+.hint {
+  margin: 8px 0 0;
+  color: #556477;
+}
+
+.primaryButton {
+  margin-top: 14px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #0f766e, #1d4ed8);
+  color: white;
+  cursor: pointer;
+  padding: 11px 16px;
+}
