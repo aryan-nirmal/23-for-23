@@ -11,7 +11,7 @@
 
 <br />
 
-# 23 for 23 🚀
+# 23 for 23 
 
 A comprehensive challenge to build **23 production-grade MVPs**. This monorepo houses all 23 projects, ranging from AI-powered SaaS tools to mobile applications and machine learning models.
 
