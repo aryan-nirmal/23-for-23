@@ -15,7 +15,7 @@ export default async function Home() {
         </Link>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="card p-5 border-l-4 border-l-primary-500">
           <p className="text-sm font-medium text-muted flex items-center gap-1"><TrendingUp size={14} /> Total Receivables</p>
           <p className="text-2xl font-bold mt-2">₹ {totalReceivables.toLocaleString()}</p>
