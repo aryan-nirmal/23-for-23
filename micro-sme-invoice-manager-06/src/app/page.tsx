@@ -47,7 +47,7 @@ export default async function Home() {
           <div className="card overflow-hidden">
             <div className="divide-y divide-card-border">
               {invoices.slice(0, 5).map((invoice) => (
-                <Link key={invoice.id} href={`/invoices/${invoice.id}`} className="p-4 flex items-center justify-between hover:bg-gray-50 transition-colors block">
+                <Link key={invoice.id} href={`/invoices/${invoice.id}`} className="p-5 flex items-center justify-between hover:bg-gray-50 transition-colors block">
                   <div className="flex items-center gap-4">
                     <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 font-medium text-sm">
                       {invoice.client.name.charAt(0)}
