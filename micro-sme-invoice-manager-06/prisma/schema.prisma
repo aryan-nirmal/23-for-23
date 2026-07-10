@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Business {
+  id        String    @id @default(uuid())
+  owner_id  String    @default("default-owner")
+  name      String
+  gstin     String?
+  address   String?
+  clients   Client[]
+  invoices  Invoice[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Client {
+  id          String    @id @default(uuid())
+  business_id String
+  name        String
+  phone       String
+  gstin       String?
+  address     String?
+  business    Business  @relation(fields: [business_id], references: [id])
+  invoices    Invoice[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Invoice {
+  id             String          @id @default(uuid())
+  business_id    String
+  client_id      String
+  invoice_number String
+  issue_date     DateTime
+  due_date       DateTime
+  subtotal       Float
+  tax_total      Float
+  total          Float
+  status         String          @default("unpaid") // unpaid, partial, paid, overdue
+  business       Business        @relation(fields: [business_id], references: [id])
+  client         Client          @relation(fields: [client_id], references: [id])
+  items          InvoiceItem[]
+  payments       PaymentEvent[]
+  reminders      ReminderJob[]
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+}
+
+model InvoiceItem {
+  id          String   @id @default(uuid())
+  invoice_id  String
+  description String
+  qty         Float
+  unit_price  Float
+  gst_rate    Float    // e.g., 18 for 18%
+  line_total  Float
+  invoice     Invoice  @relation(fields: [invoice_id], references: [id])
+}
+
+model PaymentEvent {
+  id         String   @id @default(uuid())
+  invoice_id String
+  amount     Float
+  paid_at    DateTime
+  method     String   // UPI, Cash, Bank Transfer
+  invoice    Invoice  @relation(fields: [invoice_id], references: [id])
+}
+
+model ReminderJob {
+  id           String   @id @default(uuid())
+  invoice_id   String
+  scheduled_at DateTime
+  channel      String   @default("whatsapp")
+  status       String   @default("pending") // pending, sent, failed
+  invoice      Invoice  @relation(fields: [invoice_id], references: [id])
+}
