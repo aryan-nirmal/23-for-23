@@ -38,7 +38,7 @@ export default async function Home() {
               <FileText size={32} />
             </div>
             <h4 className="font-semibold text-lg">No invoices yet</h4>
-            <p className="text-muted text-sm mt-1 max-w-xs mb-6">Create your first invoice to start tracking your receivables.</p>
+            <p className="text-gray-500 text-sm mt-1 max-w-xs mb-6">Create your first invoice to start tracking your receivables.</p>
             <Link href="/invoices/new" className="btn-primary flex items-center gap-2">
               <Plus size={16} /> Create Invoice
             </Link>
