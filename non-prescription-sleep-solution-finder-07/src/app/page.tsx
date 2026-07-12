@@ -22,7 +22,7 @@ export default function Home() {
         <h1 className="text-5xl md:text-6xl font-extrabold text-white mb-6 leading-tight">
           Find your path to
           <br />
-          <span className="gradient-text">better sleep</span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">better sleep</span>
         </h1>
         <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-10">
           Answer 10 questions about your sleep patterns. Get personalized,
@@ -32,7 +32,7 @@ export default function Home() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             href="/quiz"
-            className="bg-indigo-500 hover:bg-indigo-400 text-white font-semibold px-8 py-3.5 rounded-xl text-lg flex items-center justify-center gap-2 transition-all hover:shadow-lg hover:shadow-indigo-500/20"
+            className="bg-indigo-500 hover:bg-indigo-400 text-white font-semibold px-8 py-3.5 rounded-xl text-lg flex items-center justify-center gap-2 transition-all hover:shadow-lg hover:shadow-indigo-500/20 hover:-translate-y-0.5"
           >
             Start Sleep Quiz
             <ArrowRight size={18} />
@@ -56,7 +56,7 @@ export default function Home() {
           <h2 className="text-2xl font-bold text-white text-center mb-12">
             How RestPath works
           </h2>
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
             {[
               {
                 step: "1",
