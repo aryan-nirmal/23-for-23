@@ -16,6 +16,13 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Features
+
+- **Smart Calendar Sync**: Share a personalized booking link.
+- **Guest CRM**: Pipeline management for podcast guests.
+- **Automated Reminders**: Email notifications and 24-hour reminders.
+- **Feature Flags & Analytics**: Experimental toggles and tracking.
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
