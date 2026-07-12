@@ -28,7 +28,7 @@ export default function Home() {
             The purpose-built scheduling CRM for podcast hosts. Reduce back-and-forth, prevent no-shows, and maintain editorial control over your guest pipeline.
           </p>
           <div className="animate-fade-in delay-2" style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-            <Link href="/dashboard" className="btn btn-primary">
+            <Link href="/dashboard" className="btn btn-primary" style={{ fontWeight: 'bold', boxShadow: '0 4px 14px 0 rgba(0,118,255,0.39)' }}>
               Start for Free
             </Link>
             <Link href="#features" className="btn btn-secondary">
