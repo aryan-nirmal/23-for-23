@@ -39,7 +39,7 @@ export default function Home() {
       </section>
 
       <section id="features" className="container">
-        <div className="features">
+        <div className="features" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
           <div className="feature-card animate-fade-in delay-1">
             <div className="feature-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
