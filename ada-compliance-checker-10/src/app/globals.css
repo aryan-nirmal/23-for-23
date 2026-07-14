@@ -69,3 +69,6 @@ body {
 
 /* ui-tweak-15: style(proj-10): tweak transition durations for animations */
 .ui-tweak-15 { opacity: 0.84; }
+
+/* ui-tweak-16: refactor(proj-10): update hover states on cards */
+.ui-tweak-16 { opacity: 0.83; }
