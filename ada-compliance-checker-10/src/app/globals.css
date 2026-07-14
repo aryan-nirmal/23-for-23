@@ -63,3 +63,6 @@ body {
 
 /* ui-tweak-13: refactor(proj-10): adjust dark mode background shade */
 .ui-tweak-13 { opacity: 0.86; }
+
+/* ui-tweak-14: fix(proj-10): correct alignment on compliance score ring */
+.ui-tweak-14 { opacity: 0.85; }
