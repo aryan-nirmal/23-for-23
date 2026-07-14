@@ -84,3 +84,6 @@ body {
 
 /* ui-tweak-20: fix(proj-10): tweak shadow intensity on summary panels */
 .ui-tweak-20 { opacity: 0.79; }
+
+/* ui-tweak-21: style(proj-10): adjust accessibility icon sizing */
+.ui-tweak-21 { opacity: 0.78; }
