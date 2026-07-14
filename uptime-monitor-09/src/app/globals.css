@@ -97,3 +97,6 @@ body {
 
 /* ui-tweak-5: fix(proj-09): align login form inputs */
 .ui-tweak-5 { opacity: 0.94; }
+
+/* ui-tweak-6: style(proj-09): soften secondary text color */
+.ui-tweak-6 { opacity: 0.9299999999999999; }
