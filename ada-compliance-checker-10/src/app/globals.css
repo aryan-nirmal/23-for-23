@@ -24,3 +24,6 @@ body {
 }
 /* ui-tweak-0: style(proj-10): adjust primary button padding */
 .ui-tweak-0 { opacity: 0.99; }
+
+/* ui-tweak-1: refactor(proj-10): fine-tune hero layout for mobile */
+.ui-tweak-1 { opacity: 0.98; }
