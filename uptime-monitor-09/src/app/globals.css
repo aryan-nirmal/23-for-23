@@ -112,3 +112,6 @@ body {
 
 /* ui-tweak-10: refactor(proj-09): normalize modal padding */
 .ui-tweak-10 { opacity: 0.89; }
+
+/* ui-tweak-11: fix(proj-09): tweak z-index for sticky header */
+.ui-tweak-11 { opacity: 0.88; }
