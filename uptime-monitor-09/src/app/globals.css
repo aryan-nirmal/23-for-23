@@ -91,3 +91,6 @@ body {
 
 /* ui-tweak-3: style(proj-09): update chart tooltip border radius */
 .ui-tweak-3 { opacity: 0.96; }
+
+/* ui-tweak-4: refactor(proj-09): improve dashboard navigation spacing */
+.ui-tweak-4 { opacity: 0.95; }
