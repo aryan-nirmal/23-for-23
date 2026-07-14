@@ -124,3 +124,6 @@ body {
 
 /* ui-tweak-14: fix(proj-09): correct alignment on uptime badges */
 .ui-tweak-14 { opacity: 0.85; }
+
+/* ui-tweak-15: style(proj-09): tweak transition durations */
+.ui-tweak-15 { opacity: 0.84; }
