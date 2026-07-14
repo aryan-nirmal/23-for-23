@@ -79,3 +79,6 @@ body {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+/* ui-tweak-0: style(proj-09): adjust primary button padding */
+.ui-tweak-0 { opacity: 0.99; }
