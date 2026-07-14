@@ -103,3 +103,6 @@ body {
 
 /* ui-tweak-7: refactor(proj-09): polish marketing page typography */
 .ui-tweak-7 { opacity: 0.9199999999999999; }
+
+/* ui-tweak-8: fix(proj-09): increase contrast on danger alerts */
+.ui-tweak-8 { opacity: 0.91; }
