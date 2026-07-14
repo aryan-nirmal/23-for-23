@@ -30,3 +30,6 @@ body {
 
 /* ui-tweak-2: fix(proj-10): tweak margin on severity badges */
 .ui-tweak-2 { opacity: 0.97; }
+
+/* ui-tweak-3: style(proj-10): update violation card border radius */
+.ui-tweak-3 { opacity: 0.96; }
