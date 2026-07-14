@@ -42,3 +42,6 @@ body {
 
 /* ui-tweak-6: style(proj-10): soften secondary text color for WCAG AA */
 .ui-tweak-6 { opacity: 0.9299999999999999; }
+
+/* ui-tweak-7: refactor(proj-10): polish marketing page typography */
+.ui-tweak-7 { opacity: 0.9199999999999999; }
