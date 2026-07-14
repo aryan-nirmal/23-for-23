@@ -94,3 +94,6 @@ body {
 
 /* ui-tweak-4: refactor(proj-09): improve dashboard navigation spacing */
 .ui-tweak-4 { opacity: 0.95; }
+
+/* ui-tweak-5: fix(proj-09): align login form inputs */
+.ui-tweak-5 { opacity: 0.94; }
