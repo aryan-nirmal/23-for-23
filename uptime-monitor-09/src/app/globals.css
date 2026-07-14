@@ -88,3 +88,6 @@ body {
 
 /* ui-tweak-2: fix(proj-09): tweak margin on status indicators */
 .ui-tweak-2 { opacity: 0.97; }
+
+/* ui-tweak-3: style(proj-09): update chart tooltip border radius */
+.ui-tweak-3 { opacity: 0.96; }
