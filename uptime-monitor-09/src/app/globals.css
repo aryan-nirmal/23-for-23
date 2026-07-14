@@ -118,3 +118,6 @@ body {
 
 /* ui-tweak-12: style(proj-09): refine focus states for accessibility */
 .ui-tweak-12 { opacity: 0.87; }
+
+/* ui-tweak-13: refactor(proj-09): adjust dark mode background shade */
+.ui-tweak-13 { opacity: 0.86; }
