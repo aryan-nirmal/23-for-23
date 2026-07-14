@@ -115,3 +115,6 @@ body {
 
 /* ui-tweak-11: fix(proj-09): tweak z-index for sticky header */
 .ui-tweak-11 { opacity: 0.88; }
+
+/* ui-tweak-12: style(proj-09): refine focus states for accessibility */
+.ui-tweak-12 { opacity: 0.87; }
