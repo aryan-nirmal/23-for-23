@@ -75,3 +75,6 @@ body {
 
 /* ui-tweak-17: fix(proj-10): adjust line height for readability */
 .ui-tweak-17 { opacity: 0.82; }
+
+/* ui-tweak-18: style(proj-10): fine-tune warning border colors */
+.ui-tweak-18 { opacity: 0.81; }
