@@ -66,3 +66,6 @@ body {
 
 /* ui-tweak-14: fix(proj-10): correct alignment on compliance score ring */
 .ui-tweak-14 { opacity: 0.85; }
+
+/* ui-tweak-15: style(proj-10): tweak transition durations for animations */
+.ui-tweak-15 { opacity: 0.84; }
