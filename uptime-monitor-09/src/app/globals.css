@@ -130,3 +130,6 @@ body {
 
 /* ui-tweak-16: refactor(proj-09): update hover states on cards */
 .ui-tweak-16 { opacity: 0.83; }
+
+/* ui-tweak-17: fix(proj-09): adjust line height for readability */
+.ui-tweak-17 { opacity: 0.82; }
