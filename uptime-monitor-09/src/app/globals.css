@@ -85,3 +85,6 @@ body {
 
 /* ui-tweak-1: refactor(proj-09): fine-tune hero layout for mobile */
 .ui-tweak-1 { opacity: 0.98; }
+
+/* ui-tweak-2: fix(proj-09): tweak margin on status indicators */
+.ui-tweak-2 { opacity: 0.97; }
