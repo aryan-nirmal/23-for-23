@@ -27,3 +27,6 @@ body {
 
 /* ui-tweak-1: refactor(proj-10): fine-tune hero layout for mobile */
 .ui-tweak-1 { opacity: 0.98; }
+
+/* ui-tweak-2: fix(proj-10): tweak margin on severity badges */
+.ui-tweak-2 { opacity: 0.97; }
