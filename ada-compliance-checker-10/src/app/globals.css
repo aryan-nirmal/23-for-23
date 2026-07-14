@@ -78,3 +78,6 @@ body {
 
 /* ui-tweak-18: style(proj-10): fine-tune warning border colors */
 .ui-tweak-18 { opacity: 0.81; }
+
+/* ui-tweak-19: refactor(proj-10): improve responsive breakpoints on report page */
+.ui-tweak-19 { opacity: 0.8; }
