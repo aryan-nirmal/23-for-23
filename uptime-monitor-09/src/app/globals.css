@@ -139,3 +139,6 @@ body {
 
 /* ui-tweak-19: refactor(proj-09): improve responsive breakpoints */
 .ui-tweak-19 { opacity: 0.8; }
+
+/* ui-tweak-20: fix(proj-09): tweak shadow intensity on panels */
+.ui-tweak-20 { opacity: 0.79; }
