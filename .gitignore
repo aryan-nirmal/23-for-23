@@ -56,7 +56,6 @@ yarn-error.log*
 
 # Exclude all projects from git temporarily
 # (We will forcefully add them one by one as per the plan)
-*-10/
 *-11/
 *-12/
 *-13/
