@@ -22,3 +22,5 @@ body {
   background-color: rgb(16 185 129 / 0.3);
   color: #fafafa;
 }
+/* ui-tweak-0: style(proj-10): adjust primary button padding */
+.ui-tweak-0 { opacity: 0.99; }
