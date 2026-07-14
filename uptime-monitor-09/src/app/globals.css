@@ -133,3 +133,6 @@ body {
 
 /* ui-tweak-17: fix(proj-09): adjust line height for readability */
 .ui-tweak-17 { opacity: 0.82; }
+
+/* ui-tweak-18: style(proj-09): fine-tune border colors */
+.ui-tweak-18 { opacity: 0.81; }
