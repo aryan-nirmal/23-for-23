@@ -33,3 +33,6 @@ body {
 
 /* ui-tweak-3: style(proj-10): update violation card border radius */
 .ui-tweak-3 { opacity: 0.96; }
+
+/* ui-tweak-4: refactor(proj-10): improve header navigation spacing */
+.ui-tweak-4 { opacity: 0.95; }
