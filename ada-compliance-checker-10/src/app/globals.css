@@ -57,3 +57,6 @@ body {
 
 /* ui-tweak-11: fix(proj-10): tweak z-index for sticky header */
 .ui-tweak-11 { opacity: 0.88; }
+
+/* ui-tweak-12: style(proj-10): refine focus rings for keyboard navigation */
+.ui-tweak-12 { opacity: 0.87; }
