@@ -48,3 +48,6 @@ body {
 
 /* ui-tweak-8: fix(proj-10): increase contrast on danger alerts */
 .ui-tweak-8 { opacity: 0.91; }
+
+/* ui-tweak-9: style(proj-10): adjust gap in summary flex containers */
+.ui-tweak-9 { opacity: 0.9; }
