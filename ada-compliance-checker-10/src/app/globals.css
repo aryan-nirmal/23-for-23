@@ -60,3 +60,6 @@ body {
 
 /* ui-tweak-12: style(proj-10): refine focus rings for keyboard navigation */
 .ui-tweak-12 { opacity: 0.87; }
+
+/* ui-tweak-13: refactor(proj-10): adjust dark mode background shade */
+.ui-tweak-13 { opacity: 0.86; }
