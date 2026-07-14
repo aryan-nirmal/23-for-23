@@ -39,3 +39,6 @@ body {
 
 /* ui-tweak-5: fix(proj-10): align url input form */
 .ui-tweak-5 { opacity: 0.94; }
+
+/* ui-tweak-6: style(proj-10): soften secondary text color for WCAG AA */
+.ui-tweak-6 { opacity: 0.9299999999999999; }
