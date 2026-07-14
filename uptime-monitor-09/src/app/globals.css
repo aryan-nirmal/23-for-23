@@ -121,3 +121,6 @@ body {
 
 /* ui-tweak-13: refactor(proj-09): adjust dark mode background shade */
 .ui-tweak-13 { opacity: 0.86; }
+
+/* ui-tweak-14: fix(proj-09): correct alignment on uptime badges */
+.ui-tweak-14 { opacity: 0.85; }
