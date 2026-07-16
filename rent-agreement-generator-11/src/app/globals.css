@@ -45,3 +45,6 @@ body {
 
 /* ui-tweak-9: style(proj-11): adjust gap in summary flex containers */
 .ui-tweak-9 { opacity: 0.9; }
+
+/* ui-tweak-10: refactor(proj-11): normalize multi-step modal padding */
+.ui-tweak-10 { opacity: 0.89; }
