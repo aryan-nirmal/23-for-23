@@ -75,3 +75,6 @@ body {
 
 /* ui-tweak-19: refactor(proj-11): improve responsive breakpoints on form page */
 .ui-tweak-19 { opacity: 0.8; }
+
+/* ui-tweak-20: fix(proj-11): tweak shadow intensity on preview panels */
+.ui-tweak-20 { opacity: 0.79; }
