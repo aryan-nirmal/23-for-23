@@ -57,3 +57,6 @@ body {
 
 /* ui-tweak-13: refactor(proj-11): adjust dark mode background shade */
 .ui-tweak-13 { opacity: 0.86; }
+
+/* ui-tweak-14: fix(proj-11): correct alignment on document preview container */
+.ui-tweak-14 { opacity: 0.85; }
