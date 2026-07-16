@@ -66,3 +66,6 @@ body {
 
 /* ui-tweak-16: refactor(proj-11): update hover states on action buttons */
 .ui-tweak-16 { opacity: 0.83; }
+
+/* ui-tweak-17: fix(proj-11): adjust line height for legal document readability */
+.ui-tweak-17 { opacity: 0.82; }
