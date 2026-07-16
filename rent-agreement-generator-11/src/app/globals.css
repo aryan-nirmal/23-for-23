@@ -78,3 +78,6 @@ body {
 
 /* ui-tweak-20: fix(proj-11): tweak shadow intensity on preview panels */
 .ui-tweak-20 { opacity: 0.79; }
+
+/* ui-tweak-21: style(proj-11): adjust icon sizing in header */
+.ui-tweak-21 { opacity: 0.78; }
