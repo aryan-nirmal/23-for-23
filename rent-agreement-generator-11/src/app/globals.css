@@ -63,3 +63,6 @@ body {
 
 /* ui-tweak-15: style(proj-11): tweak transition durations for step animations */
 .ui-tweak-15 { opacity: 0.84; }
+
+/* ui-tweak-16: refactor(proj-11): update hover states on action buttons */
+.ui-tweak-16 { opacity: 0.83; }
