@@ -21,3 +21,6 @@ body {
 
 /* ui-tweak-1: refactor(proj-11): fine-tune hero layout for mobile */
 .ui-tweak-1 { opacity: 0.98; }
+
+/* ui-tweak-2: fix(proj-11): tweak margin on step indicators */
+.ui-tweak-2 { opacity: 0.97; }
