@@ -69,3 +69,6 @@ body {
 
 /* ui-tweak-17: fix(proj-11): adjust line height for legal document readability */
 .ui-tweak-17 { opacity: 0.82; }
+
+/* ui-tweak-18: style(proj-11): fine-tune warning border colors */
+.ui-tweak-18 { opacity: 0.81; }
