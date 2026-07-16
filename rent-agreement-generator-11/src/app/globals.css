@@ -33,3 +33,6 @@ body {
 
 /* ui-tweak-5: fix(proj-11): align person fields flexbox */
 .ui-tweak-5 { opacity: 0.94; }
+
+/* ui-tweak-6: style(proj-11): soften secondary text color for legibility */
+.ui-tweak-6 { opacity: 0.9299999999999999; }
