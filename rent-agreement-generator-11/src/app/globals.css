@@ -72,3 +72,6 @@ body {
 
 /* ui-tweak-18: style(proj-11): fine-tune warning border colors */
 .ui-tweak-18 { opacity: 0.81; }
+
+/* ui-tweak-19: refactor(proj-11): improve responsive breakpoints on form page */
+.ui-tweak-19 { opacity: 0.8; }
