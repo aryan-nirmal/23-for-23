@@ -60,3 +60,6 @@ body {
 
 /* ui-tweak-14: fix(proj-11): correct alignment on document preview container */
 .ui-tweak-14 { opacity: 0.85; }
+
+/* ui-tweak-15: style(proj-11): tweak transition durations for step animations */
+.ui-tweak-15 { opacity: 0.84; }
