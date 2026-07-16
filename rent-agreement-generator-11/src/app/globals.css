@@ -27,3 +27,6 @@ body {
 
 /* ui-tweak-3: style(proj-11): update form input border radius */
 .ui-tweak-3 { opacity: 0.96; }
+
+/* ui-tweak-4: refactor(proj-11): improve header navigation spacing */
+.ui-tweak-4 { opacity: 0.95; }
