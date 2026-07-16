@@ -42,3 +42,6 @@ body {
 
 /* ui-tweak-8: fix(proj-11): increase contrast on validation error states */
 .ui-tweak-8 { opacity: 0.91; }
+
+/* ui-tweak-9: style(proj-11): adjust gap in summary flex containers */
+.ui-tweak-9 { opacity: 0.9; }
