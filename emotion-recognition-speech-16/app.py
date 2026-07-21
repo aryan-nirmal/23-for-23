@@ -234,3 +234,5 @@ if __name__ == "__main__":
 # UI/Logic Iteration 36: refactor(proj-16): modularize streamlit page configuration
 
 # UI/Logic Iteration 37: style(proj-16): adjust spacing between waveform and results
+
+# UI/Logic Iteration 38: fix(proj-16): handle unsupported audio formats gracefully
