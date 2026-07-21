@@ -208,3 +208,5 @@ if __name__ == "__main__":
 # UI/Logic Iteration 23: fix(proj-16): adjust padding for mobile layout
 
 # UI/Logic Iteration 24: refactor(proj-16): improve error message clarity for missing mic
+
+# UI/Logic Iteration 25: style(proj-16): update primary button hover state
