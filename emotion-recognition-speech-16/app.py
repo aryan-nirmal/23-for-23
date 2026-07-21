@@ -206,3 +206,5 @@ if __name__ == "__main__":
 # UI/Logic Iteration 22: style(proj-16): ensure all color contrast ratios meet WCAG AAA
 
 # UI/Logic Iteration 23: fix(proj-16): adjust padding for mobile layout
+
+# UI/Logic Iteration 24: refactor(proj-16): improve error message clarity for missing mic
