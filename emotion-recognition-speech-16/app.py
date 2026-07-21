@@ -226,3 +226,5 @@ if __name__ == "__main__":
 # UI/Logic Iteration 32: fix(proj-16): prevent double submission on record button
 
 # UI/Logic Iteration 33: refactor(proj-16): add type hints to prediction function
+
+# UI/Logic Iteration 34: style(proj-16): refine spectrogram visualization palette
