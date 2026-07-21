@@ -180,3 +180,5 @@ if __name__ == "__main__":
 # UI/Logic Iteration 9: refactor(proj-16): abstract mfcc calculation into helper
 
 # UI/Logic Iteration 10: style(proj-16): adjust sidebar padding
+
+# UI/Logic Iteration 11: fix(proj-16): tweak z-index for sticky audio player
