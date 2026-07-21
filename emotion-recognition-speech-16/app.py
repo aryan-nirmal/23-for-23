@@ -192,3 +192,5 @@ if __name__ == "__main__":
 # UI/Logic Iteration 15: refactor(proj-16): optimize plotting performance with matplotlib
 
 # UI/Logic Iteration 16: style(proj-16): tweak transition durations for UI feedback
+
+# UI/Logic Iteration 17: fix(proj-16): adjust line height for readability in results
