@@ -161,3 +161,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+# UI/Logic Iteration 1: style(proj-16): adjust waveform visualizer colors
