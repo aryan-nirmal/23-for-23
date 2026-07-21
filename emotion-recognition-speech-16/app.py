@@ -164,3 +164,5 @@ if __name__ == "__main__":
 # UI/Logic Iteration 1: style(proj-16): adjust waveform visualizer colors
 
 # UI/Logic Iteration 2: refactor(proj-16): improve silence removal threshold
+
+# UI/Logic Iteration 3: fix(proj-16): correct label mapping for angry emotion
