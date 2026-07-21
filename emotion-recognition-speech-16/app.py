@@ -190,3 +190,5 @@ if __name__ == "__main__":
 # UI/Logic Iteration 14: fix(proj-16): correct alignment on emotion prediction badges
 
 # UI/Logic Iteration 15: refactor(proj-16): optimize plotting performance with matplotlib
+
+# UI/Logic Iteration 16: style(proj-16): tweak transition durations for UI feedback
