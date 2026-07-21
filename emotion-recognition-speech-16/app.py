@@ -232,3 +232,5 @@ if __name__ == "__main__":
 # UI/Logic Iteration 35: fix(proj-16): correct padding on history log items
 
 # UI/Logic Iteration 36: refactor(proj-16): modularize streamlit page configuration
+
+# UI/Logic Iteration 37: style(proj-16): adjust spacing between waveform and results
