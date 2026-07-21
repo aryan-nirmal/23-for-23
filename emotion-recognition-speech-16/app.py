@@ -198,3 +198,5 @@ if __name__ == "__main__":
 # UI/Logic Iteration 18: refactor(proj-16): improve responsive breakpoints on waveform
 
 # UI/Logic Iteration 19: style(proj-16): fine-tune border colors on analysis box
+
+# UI/Logic Iteration 20: fix(proj-16): tweak shadow intensity on summary panels
