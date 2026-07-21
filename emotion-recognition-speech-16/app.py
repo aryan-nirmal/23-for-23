@@ -200,3 +200,5 @@ if __name__ == "__main__":
 # UI/Logic Iteration 19: style(proj-16): fine-tune border colors on analysis box
 
 # UI/Logic Iteration 20: fix(proj-16): tweak shadow intensity on summary panels
+
+# UI/Logic Iteration 21: refactor(proj-16): finalize UI polish for beta release
