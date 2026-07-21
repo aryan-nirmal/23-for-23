@@ -186,3 +186,5 @@ if __name__ == "__main__":
 # UI/Logic Iteration 12: refactor(proj-16): handle empty audio file edge case
 
 # UI/Logic Iteration 13: style(proj-16): soften secondary text color
+
+# UI/Logic Iteration 14: fix(proj-16): correct alignment on emotion prediction badges
