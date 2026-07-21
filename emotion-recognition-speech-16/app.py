@@ -214,3 +214,5 @@ if __name__ == "__main__":
 # UI/Logic Iteration 26: fix(proj-16): resolve matplotlib warning for non-GUI backend
 
 # UI/Logic Iteration 27: refactor(proj-16): clean up unused imports in app
+
+# UI/Logic Iteration 28: style(proj-16): adjust font size of prediction labels
