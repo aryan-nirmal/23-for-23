@@ -172,3 +172,5 @@ if __name__ == "__main__":
 # UI/Logic Iteration 5: refactor(proj-16): optimize audio loading caching
 
 # UI/Logic Iteration 6: docs(proj-16): add inline comments for librosa feature extraction
+
+# UI/Logic Iteration 7: style(proj-16): refine focus states on record button
