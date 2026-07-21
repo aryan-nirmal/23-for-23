@@ -228,3 +228,5 @@ if __name__ == "__main__":
 # UI/Logic Iteration 33: refactor(proj-16): add type hints to prediction function
 
 # UI/Logic Iteration 34: style(proj-16): refine spectrogram visualization palette
+
+# UI/Logic Iteration 35: fix(proj-16): correct padding on history log items
