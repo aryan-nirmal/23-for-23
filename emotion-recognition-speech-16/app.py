@@ -236,3 +236,5 @@ if __name__ == "__main__":
 # UI/Logic Iteration 37: style(proj-16): adjust spacing between waveform and results
 
 # UI/Logic Iteration 38: fix(proj-16): handle unsupported audio formats gracefully
+
+# UI/Logic Iteration 39: refactor(proj-16): upgrade to latest streamlit caching decorator
