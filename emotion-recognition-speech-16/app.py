@@ -162,3 +162,5 @@ def main():
 if __name__ == "__main__":
     main()
 # UI/Logic Iteration 1: style(proj-16): adjust waveform visualizer colors
+
+# UI/Logic Iteration 2: refactor(proj-16): improve silence removal threshold
