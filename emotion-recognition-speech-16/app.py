@@ -176,3 +176,5 @@ if __name__ == "__main__":
 # UI/Logic Iteration 7: style(proj-16): refine focus states on record button
 
 # UI/Logic Iteration 8: fix(proj-16): increase contrast on confidence score bars
+
+# UI/Logic Iteration 9: refactor(proj-16): abstract mfcc calculation into helper
