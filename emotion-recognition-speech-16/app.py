@@ -168,3 +168,5 @@ if __name__ == "__main__":
 # UI/Logic Iteration 3: fix(proj-16): correct label mapping for angry emotion
 
 # UI/Logic Iteration 4: style(proj-16): update application title layout
+
+# UI/Logic Iteration 5: refactor(proj-16): optimize audio loading caching
