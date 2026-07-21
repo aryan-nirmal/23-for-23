@@ -170,3 +170,5 @@ if __name__ == "__main__":
 # UI/Logic Iteration 4: style(proj-16): update application title layout
 
 # UI/Logic Iteration 5: refactor(proj-16): optimize audio loading caching
+
+# UI/Logic Iteration 6: docs(proj-16): add inline comments for librosa feature extraction
