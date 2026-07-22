@@ -108,3 +108,5 @@ class TurfBookingApp extends StatelessWidget {
 // UI/Logic Iteration 29: refactor(proj-17): extract repeated text styles to theme data
 
 // UI/Logic Iteration 30: fix(proj-17): resolve renderflex overflow on small screens
+
+// UI/Logic Iteration 31: style(proj-17): tweak divider thickness on reviews list
