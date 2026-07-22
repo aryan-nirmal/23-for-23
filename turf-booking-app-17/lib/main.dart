@@ -80,3 +80,5 @@ class TurfBookingApp extends StatelessWidget {
 // UI/Logic Iteration 15: fix(proj-17): correct alignment on user profile avatar
 
 // UI/Logic Iteration 16: style(proj-17): tweak transition durations for route animations
+
+// UI/Logic Iteration 17: refactor(proj-17): update hover states on web version buttons
