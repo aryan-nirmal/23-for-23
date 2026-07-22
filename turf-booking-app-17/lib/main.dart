@@ -64,3 +64,5 @@ class TurfBookingApp extends StatelessWidget {
 // UI/Logic Iteration 7: style(proj-17): soften secondary text color on map view
 
 // UI/Logic Iteration 8: refactor(proj-17): polish app bar typography
+
+// UI/Logic Iteration 9: fix(proj-17): increase contrast on sold-out indicators
