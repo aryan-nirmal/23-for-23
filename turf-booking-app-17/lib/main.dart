@@ -54,3 +54,5 @@ class TurfBookingApp extends StatelessWidget {
 // UI/Logic Iteration 2: refactor(proj-17): fine-tune turf card layout for mobile
 
 // UI/Logic Iteration 3: fix(proj-17): tweak margin on available time slots
+
+// UI/Logic Iteration 4: style(proj-17): update booking confirmation dialog border radius
