@@ -118,3 +118,5 @@ class TurfBookingApp extends StatelessWidget {
 // UI/Logic Iteration 34: style(proj-17): adjust image corner radii for consistency
 
 // UI/Logic Iteration 35: refactor(proj-17): modularize booking calendar widget
+
+// UI/Logic Iteration 36: fix(proj-17): prevent double tap on confirm booking button
