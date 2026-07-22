@@ -104,3 +104,5 @@ class TurfBookingApp extends StatelessWidget {
 // UI/Logic Iteration 27: fix(proj-17): adjust safe area padding on notched devices
 
 // UI/Logic Iteration 28: style(proj-17): update generic loading spinner color
+
+// UI/Logic Iteration 29: refactor(proj-17): extract repeated text styles to theme data
