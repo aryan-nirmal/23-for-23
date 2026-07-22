@@ -9,6 +9,11 @@ export interface ProspectSnapshot {
   company: string;
   about: string;
   experienceHighlights: string[];
+  certifications?: string[];
+  education?: string[];
+  skills?: string[];
+  projects?: string[];
+  rawBodyText?: string;
   userEdits?: Partial<ProspectSnapshot>;
 }
 
