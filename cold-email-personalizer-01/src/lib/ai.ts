@@ -61,16 +61,21 @@ export async function generateDraft(
     }
   ];
 
-  const response = await fetch(provider.endpoint, {
+  let endpointUrl = provider.endpoint.trim();
+  if (endpointUrl && !endpointUrl.endsWith("/chat/completions")) {
+    endpointUrl = endpointUrl.replace(/\/+$/, "") + "/chat/completions";
+  }
+
+  const response = await fetch(endpointUrl, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${provider.apiKey}`,
+      Authorization: `Bearer ${provider.apiKey.trim()}`,
       "HTTP-Referer": "https://cold-email-personalizer.extension.local",
       "X-Title": "Cold Email Personalizer"
     },
     body: JSON.stringify({
-      model: provider.model,
+      model: provider.model.trim() || "openrouter/auto",
       messages,
       temperature: 0.7
     })
