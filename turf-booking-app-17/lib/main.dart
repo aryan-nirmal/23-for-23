@@ -60,3 +60,5 @@ class TurfBookingApp extends StatelessWidget {
 // UI/Logic Iteration 5: refactor(proj-17): improve bottom navigation spacing
 
 // UI/Logic Iteration 6: fix(proj-17): align search bar icon
+
+// UI/Logic Iteration 7: style(proj-17): soften secondary text color on map view
