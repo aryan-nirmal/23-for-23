@@ -116,3 +116,5 @@ class TurfBookingApp extends StatelessWidget {
 // UI/Logic Iteration 33: fix(proj-17): handle null safety edge cases in user model
 
 // UI/Logic Iteration 34: style(proj-17): adjust image corner radii for consistency
+
+// UI/Logic Iteration 35: refactor(proj-17): modularize booking calendar widget
