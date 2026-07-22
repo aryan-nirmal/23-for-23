@@ -13,64 +13,33 @@ function toneGuide(tone: GenerationInput["tone"]): string {
 }
 
 export function buildColdEmailPrompt(input: GenerationInput, maxBodyWords: number): string {
-  if (!input.prospectSnapshot) {
-    throw new Error("Cold email prompt requires a prospect snapshot.");
-  }
-
-  const { prospectSnapshot } = input;
+  const prospectContext = input.prospectSnapshot
+    ? [
+        `Name: ${input.prospectSnapshot.fullName}`,
+        `Headline: ${input.prospectSnapshot.headline}`,
+        `Company: ${input.prospectSnapshot.company}`,
+        `About: ${input.prospectSnapshot.about}`,
+        `Experience highlights: ${input.prospectSnapshot.experienceHighlights?.join(" | ") || ""}`
+      ].filter(Boolean).join("\n")
+    : "";
 
   return [
-    "You are writing a personalized cold outreach email.",
+    "You are writing a personalized outreach or reply email.",
     toneGuide(input.tone),
     `Keep the main email body under ${maxBodyWords} words.`,
-    "Use only the supplied facts. Do not invent achievements or personal details.",
-    "Output strict JSON with keys: subject, body, followUp, rationale.",
-    "The rationale array should explain the personalization choices in short bullet-like strings.",
+    'Output strict valid JSON with keys: "subject", "body", "followUp", "rationale".',
+    'Do not wrap response in markdown blocks.',
     "",
-    "Prospect context:",
-    `Name: ${prospectSnapshot.fullName}`,
-    `Headline: ${prospectSnapshot.headline}`,
-    `Company: ${prospectSnapshot.company}`,
-    `About: ${prospectSnapshot.about}`,
-    `Experience highlights: ${prospectSnapshot.experienceHighlights.join(" | ")}`,
-    "",
-    `Pitch: ${input.pitch}`,
-    `CTA: ${input.cta || "None provided"}`,
+    prospectContext ? `Prospect Context:\n${prospectContext}\n` : "",
+    `User Prompt & Context:\n${input.pitch}`,
     "",
     "Requirements:",
-    "- Subject line should be under 8 words.",
-    "- Opening line must reference something specific from the prospect context.",
-    "- Body should feel human and direct, not spammy.",
-    "- Follow-up should be shorter than the first email."
-  ].join("\n");
+    "- Subject line must be short and relevant (under 8 words).",
+    "- Body must be direct, human, and clear.",
+    "- Return pure JSON object with subject and body keys."
+  ].filter(Boolean).join("\n");
 }
 
 export function buildReplyPrompt(input: GenerationInput, maxBodyWords: number): string {
-  if (!input.threadContext) {
-    throw new Error("Reply prompt requires a thread context.");
-  }
-
-  const { threadContext } = input;
-
-  return [
-    "You are drafting a reply email for Gmail.",
-    toneGuide(input.tone),
-    `Keep the main reply body under ${maxBodyWords} words.`,
-    "Use only the supplied thread context.",
-    "Output strict JSON with keys: subject, body, followUp, rationale.",
-    "Set followUp to an empty string when not needed.",
-    "",
-    `Participants: ${threadContext.participants.join(", ")}`,
-    `Reply goal: ${threadContext.replyGoal}`,
-    `Latest message: ${threadContext.latestMessage}`,
-    `Quoted context: ${threadContext.quotedContext}`,
-    "",
-    `Pitch: ${input.pitch}`,
-    `CTA: ${input.cta || "None provided"}`,
-    "",
-    "Requirements:",
-    "- Acknowledge the thread context.",
-    "- Give a concrete next step when appropriate.",
-    "- Avoid sounding robotic or over-eager."
-  ].join("\n");
+  return buildColdEmailPrompt(input, maxBodyWords);
 }
