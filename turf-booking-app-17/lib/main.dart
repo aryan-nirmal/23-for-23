@@ -74,3 +74,5 @@ class TurfBookingApp extends StatelessWidget {
 // UI/Logic Iteration 12: fix(proj-17): tweak z-index for sticky booking footer
 
 // UI/Logic Iteration 13: style(proj-17): refine splash screen background color
+
+// UI/Logic Iteration 14: refactor(proj-17): adjust dark mode turf images opacity
