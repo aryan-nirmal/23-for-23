@@ -120,3 +120,5 @@ class TurfBookingApp extends StatelessWidget {
 // UI/Logic Iteration 35: refactor(proj-17): modularize booking calendar widget
 
 // UI/Logic Iteration 36: fix(proj-17): prevent double tap on confirm booking button
+
+// UI/Logic Iteration 37: style(proj-17): update custom markers on turf location map
