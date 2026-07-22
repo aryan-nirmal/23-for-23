@@ -66,3 +66,5 @@ class TurfBookingApp extends StatelessWidget {
 // UI/Logic Iteration 8: refactor(proj-17): polish app bar typography
 
 // UI/Logic Iteration 9: fix(proj-17): increase contrast on sold-out indicators
+
+// UI/Logic Iteration 10: style(proj-17): adjust gap in amenity flex containers
