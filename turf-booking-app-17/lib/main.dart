@@ -84,3 +84,5 @@ class TurfBookingApp extends StatelessWidget {
 // UI/Logic Iteration 17: refactor(proj-17): update hover states on web version buttons
 
 // UI/Logic Iteration 18: fix(proj-17): adjust line height for turf description text
+
+// UI/Logic Iteration 19: style(proj-17): fine-tune active state colors on tab bar
