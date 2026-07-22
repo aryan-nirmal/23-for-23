@@ -88,3 +88,5 @@ class TurfBookingApp extends StatelessWidget {
 // UI/Logic Iteration 19: style(proj-17): fine-tune active state colors on tab bar
 
 // UI/Logic Iteration 20: refactor(proj-17): improve responsive breakpoints for tablet
+
+// UI/Logic Iteration 21: fix(proj-17): tweak shadow intensity on booking receipt cards
