@@ -1,19 +1,12 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { defaultSettings } from "../lib/defaults";
-import { createId } from "../lib/utils";
 import type {
   ActiveContext,
   EmailDraft,
-  GenerationInput,
   GmailExtractResponse,
   LinkedInExtractResponse,
-  ProspectSnapshot,
-  SavedPitch,
   Settings,
-  StorageShape,
-  ThreadContext,
-  Tone,
-  ProviderSettings
+  StorageShape
 } from "../lib/types";
 
 type ErrorLike = { error?: string; reason?: string };
@@ -22,109 +15,106 @@ async function sendRuntimeMessage<T>(message: unknown): Promise<T> {
   return chrome.runtime.sendMessage(message) as Promise<T>;
 }
 
-function emptyProspect(): ProspectSnapshot {
-  return {
-    sourceUrl: "",
-    fullName: "",
-    headline: "",
-    company: "",
-    about: "",
-    experienceHighlights: []
-  };
-}
-
-function emptyThread(): ThreadContext {
-  return {
-    threadUrl: "",
-    participants: [],
-    latestMessage: "",
-    quotedContext: "",
-    replyGoal: "Reply helpfully and move the conversation forward."
-  };
-}
-
 export function SidePanelApp() {
-  const [activeContext, setActiveContext] = useState<ActiveContext | null>(null);
   const [store, setStore] = useState<StorageShape | null>(null);
-  const [snapshot, setSnapshot] = useState<ProspectSnapshot>(emptyProspect());
-  const [threadContext, setThreadContext] = useState<ThreadContext>(emptyThread());
-  const [pitchName, setPitchName] = useState("");
-  const [pitch, setPitch] = useState("");
-  const [cta, setCta] = useState(defaultSettings.defaultCta);
-  const [tone, setTone] = useState<Tone>(defaultSettings.defaultTone);
+  const [showSettings, setShowSettings] = useState(false);
+  const [promptText, setPromptText] = useState("");
   const [draft, setDraft] = useState<EmailDraft | null>(null);
-  const [status, setStatus] = useState("Ready.");
+  const [refineText, setRefineText] = useState("");
+  const [status, setStatus] = useState("Ready to extract.");
   const [busy, setBusy] = useState(false);
+
+  // Settings form states
+  const [apiKey, setApiKey] = useState("");
+  const [model, setModel] = useState("openrouter/auto");
+  const [endpoint, setEndpoint] = useState("https://openrouter.ai/api/v1/chat/completions");
 
   useEffect(() => {
     void initialize();
   }, []);
 
   async function initialize() {
-    const [context, nextStore] = await Promise.all([
-      sendRuntimeMessage<ActiveContext>({ type: "background.getActiveContext" }),
-      sendRuntimeMessage<StorageShape>({ type: "background.getStore" })
-    ]);
-
-    setActiveContext(context);
-    setStore(nextStore);
-    setCta(nextStore.settings.defaultCta);
-    setTone(nextStore.settings.defaultTone);
+    try {
+      const nextStore = await sendRuntimeMessage<StorageShape>({ type: "background.getStore" });
+      setStore(nextStore);
+      if (nextStore?.settings?.provider) {
+        setApiKey(nextStore.settings.provider.apiKey || "");
+        setModel(nextStore.settings.provider.model || "openrouter/auto");
+        setEndpoint(nextStore.settings.provider.endpoint || "https://openrouter.ai/api/v1/chat/completions");
+        setShowSettings(!nextStore.settings.provider.apiKey);
+      }
+    } catch {
+      setStatus("Could not load settings.");
+    }
   }
-
-  const isLinkedIn = activeContext?.page === "linkedin";
-  const isGmail = activeContext?.page === "gmail";
-
-  const canGenerateColdEmail = Boolean(
-    (snapshot.fullName || snapshot.about || snapshot.headline) && pitch.trim().length >= 20
-  );
-  const canGenerateReply = Boolean(
-    (threadContext.latestMessage || threadContext.quotedContext) && pitch.trim().length >= 20
-  );
-
-  const prospectSummary = useMemo(
-    () =>
-      [snapshot.fullName, snapshot.headline, snapshot.company]
-        .filter(Boolean)
-        .join(" • "),
-    [snapshot]
-  );
 
   async function handleExtract() {
     setBusy(true);
-    setStatus("Extracting context from the current page...");
+    setStatus("Fetching fresh context from active tab...");
     setDraft(null);
 
     try {
+      const context = await sendRuntimeMessage<ActiveContext>({ type: "background.getActiveContext" });
       const response = await sendRuntimeMessage<
-        LinkedInExtractResponse | GmailExtractResponse | ErrorLike
+        LinkedInExtractResponse | GmailExtractResponse | { ok: boolean; context?: { latestMessage?: string; quotedContext?: string }; reason?: string } | ErrorLike
       >({ type: "background.extractCurrentPage" });
 
       if ("error" in response && response.error) {
         throw new Error(response.error);
       }
 
-      if (isLinkedIn) {
-        const result = response as LinkedInExtractResponse;
-        if (!result.ok || !result.snapshot) {
-          throw new Error(result.reason || "LinkedIn extraction failed.");
+      let extractedInfo = "";
+      let pageType: string = String(context?.page || "page");
+
+      if ("snapshot" in response && response.snapshot) {
+        pageType = "LinkedIn Profile";
+        const s = response.snapshot;
+        const parts = [
+          s.fullName ? `Name: ${s.fullName}` : "",
+          s.headline ? `Headline: ${s.headline}` : "",
+          s.company ? `Company: ${s.company}` : "",
+          s.about ? `About:\n${s.about}` : "",
+          s.experienceHighlights?.length ? `\nWork Experience:\n• ${s.experienceHighlights.join("\n• ")}` : "",
+          s.certifications?.length ? `\nLicenses & Certifications:\n• ${s.certifications.join("\n• ")}` : "",
+          s.education?.length ? `\nEducation:\n• ${s.education.join("\n• ")}` : "",
+          s.skills?.length ? `\nSkills:\n• ${s.skills.join("\n• ")}` : "",
+          s.projects?.length ? `\nProjects:\n• ${s.projects.join("\n• ")}` : ""
+        ].filter(Boolean);
+
+        const structuredText = parts.join("\n");
+
+        if (structuredText.trim().length > 30) {
+          extractedInfo = structuredText;
+        } else if (s.rawBodyText) {
+          extractedInfo = `Name: ${s.fullName || "LinkedIn User"}\n${s.headline ? `Headline: ${s.headline}\n` : ""}\nProfile Details:\n${s.rawBodyText}`;
+        } else {
+          extractedInfo = structuredText;
         }
-        setSnapshot(result.snapshot);
-        setStatus("LinkedIn profile extracted. Review and edit before generating.");
-        return;
+      } else if ("context" in response && response.context) {
+        pageType = "Gmail Email Thread";
+        const c = response.context;
+        extractedInfo = [
+          c.latestMessage ? `Latest Message:\n${c.latestMessage}` : "",
+          c.quotedContext ? `Previous Context:\n${c.quotedContext}` : ""
+        ].filter(Boolean).join("\n\n");
+      } else if ("reason" in response && response.reason) {
+        throw new Error(response.reason);
       }
 
-      if (isGmail) {
-        const result = response as GmailExtractResponse;
-        if (!result.ok || !result.context) {
-          throw new Error(result.reason || "Gmail extraction failed.");
-        }
-        setThreadContext(result.context);
-        setStatus("Gmail thread extracted. Review the draft goal and generate a reply.");
-        return;
+      if (!extractedInfo.trim()) {
+        throw new Error("No text content found on current page. Make sure you are on a profile or email page.");
       }
 
-      setStatus("This page is not supported. Use the manual paste fields below.");
+      const formattedPrompt = `[CONTEXT FROM ${pageType.toUpperCase()}]
+${extractedInfo}
+
+---
+[INSTRUCTION]
+(Note: Type in what kind of email you want — e.g. formal cold outreach, casual networking, internship pitch, follow-up, or any custom tone/goal...)
+`;
+
+      setPromptText(formattedPrompt);
+      setStatus(`Fresh context extracted from ${pageType}!`);
     } catch (error) {
       setStatus(error instanceof Error ? error.message : "Extraction failed.");
     } finally {
@@ -132,35 +122,33 @@ export function SidePanelApp() {
     }
   }
 
-  async function handleGenerate(mode: GenerationInput["mode"]) {
-    if (!store) {
+  async function handleGenerate(customPrompt?: string) {
+    const textToUse = customPrompt || promptText;
+    if (!textToUse.trim()) {
+      setStatus("Extract context or write a prompt first.");
+      return;
+    }
+
+    if (!apiKey.trim()) {
+      setShowSettings(true);
+      setStatus("Please enter your API Key in Settings first.");
       return;
     }
 
     setBusy(true);
-    setStatus("Generating draft...");
+    setStatus("Generating email draft...");
 
     try {
-      const input: GenerationInput =
-        mode === "cold_email"
-          ? {
-              mode,
-              prospectSnapshot: snapshot,
-              pitch,
-              cta,
-              tone
-            }
-          : {
-              mode,
-              threadContext,
-              pitch,
-              cta,
-              tone
-            };
+      await saveSettings();
 
       const response = await sendRuntimeMessage<EmailDraft | ErrorLike>({
         type: "background.generateDraft",
-        payload: input
+        payload: {
+          mode: "cold_email",
+          pitch: textToUse,
+          cta: defaultSettings.defaultCta,
+          tone: defaultSettings.defaultTone
+        }
       });
 
       if ("error" in response && response.error) {
@@ -168,7 +156,8 @@ export function SidePanelApp() {
       }
 
       setDraft(response as EmailDraft);
-      setStatus("Draft generated. Edit before copying or inserting.");
+      setRefineText("");
+      setStatus("Email draft generated! You can edit or refine it below.");
     } catch (error) {
       setStatus(error instanceof Error ? error.message : "Generation failed.");
     } finally {
@@ -176,455 +165,309 @@ export function SidePanelApp() {
     }
   }
 
-  async function handleInsertIntoGmail() {
-    if (!draft) {
-      return;
-    }
+  async function handleRefine() {
+    if (!draft || !refineText.trim()) return;
 
+    const fullRefinePrompt = `[CURRENT DRAFT]
+Subject: ${draft.subject}
+Body: ${draft.body}
+
+---
+[REFINEMENT INSTRUCTION]
+${refineText}
+
+---
+Rewrite and refine the email according to the refinement instruction above. Return JSON with subject and body.`;
+
+    await handleGenerate(fullRefinePrompt);
+  }
+
+  async function saveSettings() {
+    const updatedSettings: Settings = {
+      provider: {
+        providerName: "OpenRouter",
+        endpoint: endpoint.trim() || "https://openrouter.ai/api/v1/chat/completions",
+        apiKey: apiKey.trim(),
+        model: model.trim() || "openrouter/auto"
+      },
+      defaultTone: "formal",
+      defaultCta: defaultSettings.defaultCta,
+      maxBodyWords: 150
+    };
+
+    const nextStore = await sendRuntimeMessage<StorageShape>({
+      type: "background.updateSettings",
+      payload: updatedSettings
+    });
+    setStore(nextStore);
+  }
+
+  async function handleInsert(targetType: "subject" | "body" | "both") {
+    if (!draft) return;
     setBusy(true);
-    setStatus("Trying to insert the draft into Gmail...");
+
+    const textToCopy =
+      targetType === "subject"
+        ? draft.subject
+        : targetType === "body"
+        ? draft.body
+        : `Subject: ${draft.subject}\n\n${draft.body}`;
+
+    try {
+      await navigator.clipboard.writeText(textToCopy);
+    } catch {
+      // Ignore clipboard failure
+    }
 
     try {
       const response = await sendRuntimeMessage<{ ok?: boolean; reason?: string; error?: string }>({
         type: "background.insertIntoGmail",
-        payload: { subject: draft.subject, body: draft.body }
+        payload: { subject: draft.subject, body: draft.body, targetType }
       });
 
-      if (response.error) {
-        throw new Error(response.error);
+      if (response.error || !response.ok) {
+        throw new Error(response.error || response.reason || "Copied to clipboard! Press Ctrl+V / Cmd+V to paste.");
       }
-
-      if (!response.ok) {
-        throw new Error(response.reason || "Could not insert into Gmail.");
-      }
-
-      setStatus("Draft inserted into the active Gmail compose box.");
-    } catch (error) {
-      setStatus(error instanceof Error ? error.message : "Insert failed.");
+      setStatus(`Inserted ${targetType === "both" ? "subject & body" : targetType} directly into text field!`);
+    } catch (err) {
+      setStatus(err instanceof Error ? err.message : "Copied to clipboard! Press Ctrl+V / Cmd+V to paste.");
     } finally {
       setBusy(false);
     }
   }
 
-  async function handleSavePitch() {
-    if (!pitch.trim()) {
-      setStatus("Enter a pitch before saving it.");
-      return;
-    }
-
-    const payload: SavedPitch = {
-      id: createId("local"),
-      name: pitchName.trim() || "Untitled pitch",
-      pitch,
-      targetPersona: isGmail ? "gmail-reply" : "cold-outreach",
-      cta,
-      createdAt: new Date().toISOString()
-    };
-
-    const next = await sendRuntimeMessage<SavedPitch[]>({
-      type: "background.savePitch",
-      payload
-    });
-
-    if (store) {
-      setStore({ ...store, savedPitches: next });
-    }
-
-    setStatus("Pitch saved locally.");
-  }
-
-  async function handleDeletePitch(id: string) {
-    const next = await sendRuntimeMessage<SavedPitch[]>({
-      type: "background.deletePitch",
-      payload: { id }
-    });
-
-    if (store) {
-      setStore({ ...store, savedPitches: next });
-    }
-
-    setStatus("Saved pitch removed.");
-  }
-
-  async function handleUpdateSettings(partial: SettingsPatch) {
-    if (!store) {
-      return;
-    }
-
-    const nextSettings = {
-      ...store.settings,
-      ...partial,
-      provider: {
-        ...store.settings.provider,
-        ...(partial.provider ?? {})
-      }
-    };
-
-    const response = await sendRuntimeMessage<Settings>({
-      type: "background.updateSettings",
-      payload: nextSettings
-    });
-
-    const nextStore = { ...store, settings: response };
-    setStore(nextStore);
-    setTone(response.defaultTone);
-    setCta(response.defaultCta);
-    setStatus("Settings updated locally.");
-  }
-
-  function applySavedPitch(savedPitch: SavedPitch) {
-    setPitchName(savedPitch.name);
-    setPitch(savedPitch.pitch);
-    setCta(savedPitch.cta);
-    setStatus(`Loaded saved pitch "${savedPitch.name}".`);
-  }
-
-  async function copyText(label: string, text: string) {
-    await navigator.clipboard.writeText(text);
-    setStatus(`${label} copied to clipboard.`);
-  }
-
   return (
-    <div className="shell">
-      <header className="hero">
-        <p className="eyebrow">Cold Email Personalizer</p>
-        <h1>Turn live profile and inbox context into send-ready drafts.</h1>
-        <p className="subtle">
-          LinkedIn for outbound. Gmail for reply assist. Your API key stays in local extension storage.
-        </p>
-      </header>
-
-      <section className="statusCard">
-        <div>
-          <strong>Current page</strong>
-          <p>{activeContext ? `${activeContext.page} • ${activeContext.title || activeContext.url}` : "Loading..."}</p>
-        </div>
-        <button className="primaryButton" disabled={busy} onClick={handleExtract}>
-          {busy ? "Working..." : isGmail ? "Extract Gmail Thread" : isLinkedIn ? "Extract LinkedIn Profile" : "Refresh Context"}
+    <div style={{ padding: "16px", fontFamily: "system-ui, -apple-system, sans-serif", color: "#e4e4e7", background: "#09090b", minHeight: "100vh" }}>
+      {/* Top Header Bar */}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px", borderBottom: "1px solid #27272a", paddingBottom: "10px" }}>
+        <h2 style={{ fontSize: "15px", fontWeight: 600, margin: 0, color: "#f4f4f5" }}>
+          ✉️ Email Personalizer AI
+        </h2>
+        <button
+          onClick={() => setShowSettings(!showSettings)}
+          style={{
+            background: showSettings ? "#27272a" : "#18181b",
+            color: "#a1a1aa",
+            border: "1px solid #3f3f46",
+            borderRadius: "6px",
+            padding: "4px 8px",
+            fontSize: "12px",
+            cursor: "pointer"
+          }}
+        >
+          {showSettings ? "▲ Hide Model" : "⚙️ Model Settings"}
         </button>
-      </section>
+      </div>
 
-      <section className="grid">
-        <article className="panel">
-          <div className="panelHeader">
-            <h2>Context</h2>
-            <span>{isGmail ? "Gmail" : isLinkedIn ? "LinkedIn" : "Manual"}</span>
+      {/* Collapsible Model Settings */}
+      {showSettings && (
+        <div style={{ background: "#18181b", border: "1px solid #27272a", borderRadius: "8px", padding: "12px", marginBottom: "16px" }}>
+          <div style={{ marginBottom: "10px" }}>
+            <label style={{ display: "block", fontSize: "11px", color: "#a1a1aa", marginBottom: "4px" }}>API Key (OpenRouter)</label>
+            <input
+              type="password"
+              placeholder="sk-or-v1-..."
+              value={apiKey}
+              onChange={(e) => setApiKey(e.target.value)}
+              style={{ width: "100%", padding: "6px 8px", background: "#09090b", border: "1px solid #3f3f46", borderRadius: "4px", color: "#fff", fontSize: "12px", boxSizing: "border-box" }}
+            />
           </div>
+          <div style={{ marginBottom: "10px" }}>
+            <label style={{ display: "block", fontSize: "11px", color: "#a1a1aa", marginBottom: "4px" }}>Model Slug</label>
+            <input
+              type="text"
+              placeholder="openrouter/auto"
+              value={model}
+              onChange={(e) => setModel(e.target.value)}
+              style={{ width: "100%", padding: "6px 8px", background: "#09090b", border: "1px solid #3f3f46", borderRadius: "4px", color: "#fff", fontSize: "12px", boxSizing: "border-box" }}
+            />
+          </div>
+          <div style={{ marginBottom: "10px" }}>
+            <label style={{ display: "block", fontSize: "11px", color: "#a1a1aa", marginBottom: "4px" }}>Endpoint</label>
+            <input
+              type="text"
+              placeholder="https://openrouter.ai/api/v1/chat/completions"
+              value={endpoint}
+              onChange={(e) => setEndpoint(e.target.value)}
+              style={{ width: "100%", padding: "6px 8px", background: "#09090b", border: "1px solid #3f3f46", borderRadius: "4px", color: "#fff", fontSize: "12px", boxSizing: "border-box" }}
+            />
+          </div>
+          <button
+            onClick={() => void saveSettings().then(() => { setShowSettings(false); setStatus("Settings saved."); })}
+            style={{ width: "100%", padding: "6px", background: "#2563eb", color: "#fff", border: "none", borderRadius: "4px", fontSize: "12px", fontWeight: 500, cursor: "pointer" }}
+          >
+            Save & Hide Settings
+          </button>
+        </div>
+      )}
 
-          {isGmail ? (
-            <>
-              <label>
-                Participants
-                <input
-                  value={threadContext.participants.join(", ")}
-                  onChange={(event) =>
-                    setThreadContext({
-                      ...threadContext,
-                      participants: event.target.value
-                        .split(",")
-                        .map((item) => item.trim())
-                        .filter(Boolean)
-                    })
-                  }
-                />
-              </label>
-              <label>
-                Reply goal
-                <input
-                  value={threadContext.replyGoal}
-                  onChange={(event) =>
-                    setThreadContext({ ...threadContext, replyGoal: event.target.value })
-                  }
-                />
-              </label>
-              <label>
-                Latest message
-                <textarea
-                  rows={6}
-                  value={threadContext.latestMessage}
-                  onChange={(event) =>
-                    setThreadContext({ ...threadContext, latestMessage: event.target.value })
-                  }
-                />
-              </label>
-              <label>
-                Quoted context
-                <textarea
-                  rows={5}
-                  value={threadContext.quotedContext}
-                  onChange={(event) =>
-                    setThreadContext({ ...threadContext, quotedContext: event.target.value })
-                  }
-                />
-              </label>
-            </>
-          ) : (
-            <>
-              <label>
-                Full name
-                <input
-                  value={snapshot.fullName}
-                  onChange={(event) => setSnapshot({ ...snapshot, fullName: event.target.value })}
-                />
-              </label>
-              <label>
-                Headline
-                <input
-                  value={snapshot.headline}
-                  onChange={(event) => setSnapshot({ ...snapshot, headline: event.target.value })}
-                />
-              </label>
-              <label>
-                Company
-                <input
-                  value={snapshot.company}
-                  onChange={(event) => setSnapshot({ ...snapshot, company: event.target.value })}
-                />
-              </label>
-              <label>
-                About / pasted profile text
-                <textarea
-                  rows={6}
-                  value={snapshot.about}
-                  onChange={(event) => setSnapshot({ ...snapshot, about: event.target.value })}
-                />
-              </label>
-              <label>
-                Experience highlights
-                <textarea
-                  rows={4}
-                  value={snapshot.experienceHighlights.join("\n")}
-                  onChange={(event) =>
-                    setSnapshot({
-                      ...snapshot,
-                      experienceHighlights: event.target.value
-                        .split("\n")
-                        .map((item) => item.trim())
-                        .filter(Boolean)
-                    })
-                  }
-                />
-              </label>
-              {prospectSummary ? <p className="summary">{prospectSummary}</p> : null}
-            </>
+      {/* Primary Action Button */}
+      <button
+        disabled={busy}
+        onClick={() => void handleExtract()}
+        style={{
+          width: "100%",
+          padding: "10px",
+          background: "#10b981",
+          color: "#000",
+          border: "none",
+          borderRadius: "8px",
+          fontSize: "13px",
+          fontWeight: 600,
+          cursor: busy ? "not-allowed" : "pointer",
+          marginBottom: "12px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "6px"
+        }}
+      >
+        ⚡ Extract Active Page Context
+      </button>
+
+      {/* Single Prompt Text Area */}
+      <div style={{ marginBottom: "12px" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "4px" }}>
+          <label style={{ fontSize: "12px", fontWeight: 500, color: "#d4d4d8" }}>Context & Prompt</label>
+          {promptText && (
+            <button
+              onClick={() => setPromptText("")}
+              style={{ background: "none", border: "none", color: "#71717a", fontSize: "11px", cursor: "pointer" }}
+            >
+              Clear
+            </button>
           )}
-        </article>
+        </div>
+        <textarea
+          rows={8}
+          value={promptText}
+          onChange={(e) => setPromptText(e.target.value)}
+          placeholder="Click '⚡ Extract Active Page Context' above to load context automatically, then type what kind of email you want under [INSTRUCTION] (formal, casual, internship pitch, etc.)..."
+          style={{
+            width: "100%",
+            padding: "10px",
+            background: "#18181b",
+            border: "1px solid #27272a",
+            borderRadius: "8px",
+            color: "#f4f4f5",
+            fontSize: "12px",
+            fontFamily: "monospace",
+            lineHeight: 1.4,
+            resize: "vertical",
+            boxSizing: "border-box"
+          }}
+        />
+      </div>
 
-        <article className="panel">
-          <div className="panelHeader">
-            <h2>Pitch and settings</h2>
-            <span>Prompt inputs</span>
+      {/* Generate Email Button */}
+      <button
+        disabled={busy || !promptText.trim()}
+        onClick={() => void handleGenerate()}
+        style={{
+          width: "100%",
+          padding: "10px",
+          background: busy || !promptText.trim() ? "#27272a" : "#2563eb",
+          color: busy || !promptText.trim() ? "#71717a" : "#fff",
+          border: "none",
+          borderRadius: "8px",
+          fontSize: "13px",
+          fontWeight: 600,
+          cursor: busy || !promptText.trim() ? "not-allowed" : "pointer",
+          marginBottom: "12px"
+        }}
+      >
+        {busy ? "Generating..." : "🚀 Generate Email Draft"}
+      </button>
+
+      {/* Status Bar */}
+      <div style={{ fontSize: "11px", color: "#a1a1aa", marginBottom: "16px", background: "#18181b", padding: "6px 10px", borderRadius: "6px", border: "1px solid #27272a" }}>
+        {status}
+      </div>
+
+      {/* Generated Email Result */}
+      {draft && (
+        <div style={{ background: "#18181b", border: "1px solid #3f3f46", borderRadius: "8px", padding: "12px", marginBottom: "16px" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px" }}>
+            <span style={{ fontSize: "12px", fontWeight: 600, color: "#10b981" }}>Generated Email (Editable)</span>
+            <button
+              onClick={() => {
+                navigator.clipboard.writeText(`Subject: ${draft.subject}\n\n${draft.body}`);
+                setStatus("Copied subject & body to clipboard!");
+              }}
+              style={{ background: "#27272a", color: "#e4e4e7", border: "none", padding: "4px 8px", borderRadius: "4px", fontSize: "11px", cursor: "pointer" }}
+            >
+              📋 Copy All
+            </button>
           </div>
 
-          <label>
-            Pitch template name
-            <input value={pitchName} onChange={(event) => setPitchName(event.target.value)} />
-          </label>
-          <label>
-            Product pitch
+          {/* Editable Subject Field */}
+          <div style={{ marginBottom: "10px" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "4px" }}>
+              <label style={{ fontSize: "11px", color: "#a1a1aa" }}>Subject Line:</label>
+              <button
+                onClick={() => void handleInsert("subject")}
+                style={{ background: "#27272a", color: "#60a5fa", border: "none", padding: "2px 6px", borderRadius: "4px", fontSize: "10px", cursor: "pointer" }}
+              >
+                📌 Insert Subject
+              </button>
+            </div>
+            <input
+              type="text"
+              value={draft.subject}
+              onChange={(e) => setDraft({ ...draft, subject: e.target.value })}
+              style={{ width: "100%", padding: "6px 8px", background: "#09090b", border: "1px solid #3f3f46", borderRadius: "4px", color: "#fff", fontSize: "12px", boxSizing: "border-box" }}
+            />
+          </div>
+
+          {/* Editable Body Field */}
+          <div style={{ marginBottom: "12px" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "4px" }}>
+              <label style={{ fontSize: "11px", color: "#a1a1aa" }}>Body Copy:</label>
+              <button
+                onClick={() => void handleInsert("body")}
+                style={{ background: "#27272a", color: "#34d399", border: "none", padding: "2px 6px", borderRadius: "4px", fontSize: "10px", cursor: "pointer" }}
+              >
+                📝 Insert Body
+              </button>
+            </div>
             <textarea
               rows={6}
-              value={pitch}
-              onChange={(event) => setPitch(event.target.value)}
-              placeholder="Describe the product, the pain it solves, and who it helps."
+              value={draft.body}
+              onChange={(e) => setDraft({ ...draft, body: e.target.value })}
+              style={{ width: "100%", padding: "8px", background: "#09090b", border: "1px solid #3f3f46", borderRadius: "4px", color: "#e4e4e7", fontSize: "12px", fontFamily: "sans-serif", lineHeight: 1.4, resize: "vertical", boxSizing: "border-box" }}
             />
-          </label>
-          <label>
-            CTA
-            <input value={cta} onChange={(event) => setCta(event.target.value)} />
-          </label>
-          <label>
-            Tone
-            <select value={tone} onChange={(event) => setTone(event.target.value as Tone)}>
-              <option value="formal">Formal</option>
-              <option value="casual">Casual</option>
-              <option value="startup-friendly">Startup-friendly</option>
-            </select>
-          </label>
-
-          <div className="row">
-            <button
-              className="primaryButton"
-              disabled={busy || !canGenerateColdEmail}
-              onClick={() => handleGenerate("cold_email")}
-            >
-              Generate cold email
-            </button>
-            <button
-              className="secondaryButton"
-              disabled={busy || !canGenerateReply}
-              onClick={() => handleGenerate("gmail_reply")}
-            >
-              Generate Gmail reply
-            </button>
           </div>
 
-          <div className="row">
-            <button className="secondaryButton" onClick={handleSavePitch}>
-              Save pitch
-            </button>
-            <button
-              className="secondaryButton"
-              onClick={() =>
-                void handleUpdateSettings({
-                  defaultTone: tone,
-                  defaultCta: cta
-                })
-              }
-            >
-              Save defaults
-            </button>
-          </div>
-
-          <div className="miniSettings">
-            <h3>Provider</h3>
-            <label>
-              Provider name
+          {/* Re-prompt / Refinement Input */}
+          <div style={{ background: "#09090b", border: "1px solid #27272a", borderRadius: "6px", padding: "8px", marginBottom: "12px" }}>
+            <label style={{ display: "block", fontSize: "11px", color: "#a1a1aa", marginBottom: "4px" }}>🔄 Re-prompt / Refine Email:</label>
+            <div style={{ display: "flex", gap: "6px" }}>
               <input
-                value={store?.settings.provider.providerName ?? ""}
-                onChange={(event) =>
-                  void handleUpdateSettings({
-                    provider: {
-                      providerName: event.target.value
-                    }
-                  })
-                }
+                type="text"
+                value={refineText}
+                onChange={(e) => setRefineText(e.target.value)}
+                placeholder="e.g. Make it shorter, more casual, add a call..."
+                style={{ flex: 1, padding: "6px", background: "#18181b", border: "1px solid #3f3f46", borderRadius: "4px", color: "#fff", fontSize: "11px" }}
               />
-            </label>
-            <label>
-              Endpoint
-              <input
-                value={store?.settings.provider.endpoint ?? ""}
-                onChange={(event) =>
-                  void handleUpdateSettings({
-                    provider: {
-                      endpoint: event.target.value
-                    }
-                  })
-                }
-              />
-            </label>
-            <label>
-              Model
-              <input
-                value={store?.settings.provider.model ?? ""}
-                onChange={(event) =>
-                  void handleUpdateSettings({
-                    provider: {
-                      model: event.target.value
-                    }
-                  })
-                }
-              />
-            </label>
-            <label>
-              API key
-              <input
-                type="password"
-                value={store?.settings.provider.apiKey ?? ""}
-                onChange={(event) =>
-                  void handleUpdateSettings({
-                    provider: {
-                      apiKey: event.target.value
-                    }
-                  })
-                }
-              />
-            </label>
-          </div>
-
-          <div className="savedList">
-            <div className="panelHeader">
-              <h3>Saved pitches</h3>
-              <span>{store?.savedPitches.length ?? 0}</span>
+              <button
+                disabled={busy || !refineText.trim()}
+                onClick={() => void handleRefine()}
+                style={{ padding: "6px 10px", background: "#8b5cf6", color: "#fff", border: "none", borderRadius: "4px", fontSize: "11px", fontWeight: 600, cursor: busy || !refineText.trim() ? "not-allowed" : "pointer" }}
+              >
+                Refine
+              </button>
             </div>
-            {store?.savedPitches.length ? (
-              store.savedPitches.map((item) => (
-                <div className="savedItem" key={item.id}>
-                  <button className="textButton" onClick={() => applySavedPitch(item)}>
-                    <strong>{item.name}</strong>
-                    <span>{item.pitch}</span>
-                  </button>
-                  <button className="dangerButton" onClick={() => void handleDeletePitch(item.id)}>
-                    Delete
-                  </button>
-                </div>
-              ))
-            ) : (
-              <p className="subtle">No saved pitches yet.</p>
-            )}
           </div>
-        </article>
-      </section>
 
-      <section className="panel draftPanel">
-        <div className="panelHeader">
-          <h2>Draft</h2>
-          <span>Edit before you send</span>
+          {/* Action Buttons */}
+          <button
+            onClick={() => void handleInsert("both")}
+            style={{ width: "100%", padding: "8px", background: "#059669", color: "#fff", border: "none", borderRadius: "6px", fontSize: "12px", fontWeight: 600, cursor: "pointer" }}
+          >
+            ⚡ Insert Subject & Body into Active Tab
+          </button>
         </div>
-
-        {draft ? (
-          <>
-            <label>
-              Subject
-              <input
-                value={draft.subject}
-                onChange={(event) => setDraft({ ...draft, subject: event.target.value })}
-              />
-            </label>
-            <label>
-              Body
-              <textarea
-                rows={10}
-                value={draft.body}
-                onChange={(event) => setDraft({ ...draft, body: event.target.value })}
-              />
-            </label>
-            <label>
-              Follow-up
-              <textarea
-                rows={5}
-                value={draft.followUp ?? ""}
-                onChange={(event) => setDraft({ ...draft, followUp: event.target.value })}
-              />
-            </label>
-            <div className="row">
-              <button className="primaryButton" onClick={() => void copyText("Body", draft.body)}>
-                Copy body
-              </button>
-              <button
-                className="secondaryButton"
-                onClick={() => void copyText("Subject", draft.subject)}
-              >
-                Copy subject
-              </button>
-              <button
-                className="secondaryButton"
-                disabled={!isGmail}
-                onClick={() => void handleInsertIntoGmail()}
-              >
-                Insert into Gmail
-              </button>
-            </div>
-
-            <div className="rationale">
-              <h3>Why this personalization</h3>
-              {draft.rationale.map((item, index) => (
-                <p key={`${item}-${index}`}>{item}</p>
-              ))}
-            </div>
-          </>
-        ) : (
-          <p className="subtle">
-            Generate a draft to review the subject line, reply copy, and personalization rationale here.
-          </p>
-        )}
-      </section>
-
-      <footer className="footerStatus">{status}</footer>
+      )}
     </div>
   );
 }
-type SettingsPatch = Omit<Partial<Settings>, "provider"> & {
-  provider?: Partial<ProviderSettings>;
-};
