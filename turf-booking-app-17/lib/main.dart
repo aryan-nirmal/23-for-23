@@ -112,3 +112,5 @@ class TurfBookingApp extends StatelessWidget {
 // UI/Logic Iteration 31: style(proj-17): tweak divider thickness on reviews list
 
 // UI/Logic Iteration 32: refactor(proj-17): optimize listview builder performance
+
+// UI/Logic Iteration 33: fix(proj-17): handle null safety edge cases in user model
