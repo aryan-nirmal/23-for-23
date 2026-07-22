@@ -90,3 +90,5 @@ class TurfBookingApp extends StatelessWidget {
 // UI/Logic Iteration 20: refactor(proj-17): improve responsive breakpoints for tablet
 
 // UI/Logic Iteration 21: fix(proj-17): tweak shadow intensity on booking receipt cards
+
+// UI/Logic Iteration 22: style(proj-17): adjust icon sizing in app bar
