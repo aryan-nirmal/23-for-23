@@ -58,3 +58,5 @@ class TurfBookingApp extends StatelessWidget {
 // UI/Logic Iteration 4: style(proj-17): update booking confirmation dialog border radius
 
 // UI/Logic Iteration 5: refactor(proj-17): improve bottom navigation spacing
+
+// UI/Logic Iteration 6: fix(proj-17): align search bar icon
