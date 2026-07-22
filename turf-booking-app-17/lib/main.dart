@@ -70,3 +70,5 @@ class TurfBookingApp extends StatelessWidget {
 // UI/Logic Iteration 10: style(proj-17): adjust gap in amenity flex containers
 
 // UI/Logic Iteration 11: refactor(proj-17): normalize filter modal padding
+
+// UI/Logic Iteration 12: fix(proj-17): tweak z-index for sticky booking footer
