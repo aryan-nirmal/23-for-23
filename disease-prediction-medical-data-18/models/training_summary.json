@@ -1,0 +1,28 @@
+{
+  "models_trained": 3,
+  "random_state": 42,
+  "samples_per_disease": 500,
+  "results": [
+    {
+      "disease": "diabetes",
+      "accuracy": 0.82,
+      "f1_score": 0.7353,
+      "roc_auc": 0.8563,
+      "positive_rate": 0.35
+    },
+    {
+      "disease": "heart_disease",
+      "accuracy": 0.85,
+      "f1_score": 0.8101,
+      "roc_auc": 0.9012,
+      "positive_rate": 0.4
+    },
+    {
+      "disease": "kidney_disease",
+      "accuracy": 0.82,
+      "f1_score": 0.7632,
+      "roc_auc": 0.9037,
+      "positive_rate": 0.38
+    }
+  ]
+}
