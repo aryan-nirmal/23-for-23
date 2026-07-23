@@ -1,0 +1,65 @@
+{
+  "disease": "kidney_disease",
+  "n_samples": 500,
+  "n_features": 24,
+  "feature_names": [
+    "age",
+    "bp",
+    "sg",
+    "al",
+    "su",
+    "rbc",
+    "pc",
+    "pcc",
+    "ba",
+    "bgr",
+    "bu",
+    "sc",
+    "sod",
+    "pot",
+    "hemo",
+    "pcv",
+    "wc",
+    "rc",
+    "htn",
+    "dm",
+    "cad",
+    "appet",
+    "pe",
+    "ane"
+  ],
+  "target_column": "classification",
+  "train_size": 400,
+  "test_size": 100,
+  "accuracy": 0.82,
+  "f1_score": 0.7632,
+  "roc_auc": 0.9037,
+  "positive_rate": 0.38,
+  "classification_report": {
+    "0": {
+      "precision": 0.8548387096774194,
+      "recall": 0.8548387096774194,
+      "f1-score": 0.8548387096774194,
+      "support": 62.0
+    },
+    "1": {
+      "precision": 0.7631578947368421,
+      "recall": 0.7631578947368421,
+      "f1-score": 0.7631578947368421,
+      "support": 38.0
+    },
+    "accuracy": 0.82,
+    "macro avg": {
+      "precision": 0.8089983022071308,
+      "recall": 0.8089983022071308,
+      "f1-score": 0.8089983022071308,
+      "support": 100.0
+    },
+    "weighted avg": {
+      "precision": 0.82,
+      "recall": 0.82,
+      "f1-score": 0.82,
+      "support": 100.0
+    }
+  }
+}
