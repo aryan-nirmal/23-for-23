@@ -1,0 +1,48 @@
+{
+  "disease": "diabetes",
+  "n_samples": 500,
+  "n_features": 7,
+  "feature_names": [
+    "pregnancies",
+    "glucose",
+    "blood_pressure",
+    "skin_thickness",
+    "insulin",
+    "bmi",
+    "age"
+  ],
+  "target_column": "outcome",
+  "train_size": 400,
+  "test_size": 100,
+  "accuracy": 0.82,
+  "f1_score": 0.7353,
+  "roc_auc": 0.8563,
+  "positive_rate": 0.35,
+  "classification_report": {
+    "0": {
+      "precision": 0.8507462686567164,
+      "recall": 0.8769230769230769,
+      "f1-score": 0.8636363636363636,
+      "support": 65.0
+    },
+    "1": {
+      "precision": 0.7575757575757576,
+      "recall": 0.7142857142857143,
+      "f1-score": 0.7352941176470589,
+      "support": 35.0
+    },
+    "accuracy": 0.82,
+    "macro avg": {
+      "precision": 0.804161013116237,
+      "recall": 0.7956043956043957,
+      "f1-score": 0.7994652406417113,
+      "support": 100.0
+    },
+    "weighted avg": {
+      "precision": 0.8181365897783809,
+      "recall": 0.82,
+      "f1-score": 0.818716577540107,
+      "support": 100.0
+    }
+  }
+}
