@@ -1,0 +1,54 @@
+{
+  "disease": "heart_disease",
+  "n_samples": 500,
+  "n_features": 13,
+  "feature_names": [
+    "age",
+    "sex",
+    "cp",
+    "trestbps",
+    "chol",
+    "fbs",
+    "restecg",
+    "thalach",
+    "exang",
+    "oldpeak",
+    "slope",
+    "ca",
+    "thal"
+  ],
+  "target_column": "target",
+  "train_size": 400,
+  "test_size": 100,
+  "accuracy": 0.85,
+  "f1_score": 0.8101,
+  "roc_auc": 0.9012,
+  "positive_rate": 0.4,
+  "classification_report": {
+    "0": {
+      "precision": 0.8688524590163934,
+      "recall": 0.8833333333333333,
+      "f1-score": 0.8760330578512396,
+      "support": 60.0
+    },
+    "1": {
+      "precision": 0.8205128205128205,
+      "recall": 0.8,
+      "f1-score": 0.810126582278481,
+      "support": 40.0
+    },
+    "accuracy": 0.85,
+    "macro avg": {
+      "precision": 0.844682639764607,
+      "recall": 0.8416666666666667,
+      "f1-score": 0.8430798200648604,
+      "support": 100.0
+    },
+    "weighted avg": {
+      "precision": 0.8495166036149642,
+      "recall": 0.85,
+      "f1-score": 0.8496704676221362,
+      "support": 100.0
+    }
+  }
+}
