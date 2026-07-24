@@ -1,0 +1,247 @@
+{
+  "by_cluster": {
+    "Budget Favorites": {
+      "count": 118,
+      "avg_rating": 3.27,
+      "avg_cost": 714.71,
+      "avg_votes": 3038.61
+    },
+    "Hidden Gems": {
+      "count": 123,
+      "avg_rating": 3.92,
+      "avg_cost": 819.02,
+      "avg_votes": 3837.48
+    },
+    "Premium Dining": {
+      "count": 137,
+      "avg_rating": 4.08,
+      "avg_cost": 1138.27,
+      "avg_votes": 1820.29
+    },
+    "Quick Service": {
+      "count": 122,
+      "avg_rating": 3.66,
+      "avg_cost": 812.56,
+      "avg_votes": 1046.61
+    }
+  },
+  "by_city": {
+    "Ahmedabad": {
+      "count": 66,
+      "avg_rating": 3.82
+    },
+    "Bangalore": {
+      "count": 50,
+      "avg_rating": 3.82
+    },
+    "Chennai": {
+      "count": 45,
+      "avg_rating": 3.71
+    },
+    "Delhi": {
+      "count": 57,
+      "avg_rating": 3.66
+    },
+    "Hyderabad": {
+      "count": 53,
+      "avg_rating": 3.87
+    },
+    "Jaipur": {
+      "count": 57,
+      "avg_rating": 3.63
+    },
+    "Kolkata": {
+      "count": 60,
+      "avg_rating": 3.75
+    },
+    "Lucknow": {
+      "count": 37,
+      "avg_rating": 3.69
+    },
+    "Mumbai": {
+      "count": 38,
+      "avg_rating": 3.77
+    },
+    "Pune": {
+      "count": 37,
+      "avg_rating": 3.74
+    }
+  },
+  "by_cuisine": {
+    "Biryani": {
+      "count": 36,
+      "avg_rating": 3.66
+    },
+    "Cafe": {
+      "count": 27,
+      "avg_rating": 3.75
+    },
+    "Chinese": {
+      "count": 39,
+      "avg_rating": 3.84
+    },
+    "Continental": {
+      "count": 38,
+      "avg_rating": 3.71
+    },
+    "Desserts": {
+      "count": 39,
+      "avg_rating": 3.89
+    },
+    "Fast Food": {
+      "count": 36,
+      "avg_rating": 3.84
+    },
+    "Italian": {
+      "count": 48,
+      "avg_rating": 3.68
+    },
+    "Japanese": {
+      "count": 43,
+      "avg_rating": 3.76
+    },
+    "Mexican": {
+      "count": 30,
+      "avg_rating": 3.57
+    },
+    "Mughlai": {
+      "count": 35,
+      "avg_rating": 3.7
+    },
+    "North Indian": {
+      "count": 35,
+      "avg_rating": 3.58
+    },
+    "South Indian": {
+      "count": 35,
+      "avg_rating": 3.92
+    },
+    "Street Food": {
+      "count": 30,
+      "avg_rating": 3.73
+    },
+    "Thai": {
+      "count": 29,
+      "avg_rating": 3.81
+    }
+  },
+  "sentiment_distribution": {
+    "Positive": 1094,
+    "Negative": 241,
+    "Neutral": 165
+  },
+  "top_rated": [
+    {
+      "name": "House's North Indian Express",
+      "city": "Mumbai",
+      "cuisine": "Chinese",
+      "rating": 5.0,
+      "votes": 3372,
+      "cost_for_two": 1191,
+      "cluster_label": "Premium Dining"
+    },
+    {
+      "name": "Palace's Chinese Lounge",
+      "city": "Ahmedabad",
+      "cuisine": "Desserts",
+      "rating": 5.0,
+      "votes": 235,
+      "cost_for_two": 504,
+      "cluster_label": "Quick Service"
+    },
+    {
+      "name": "Classic Junction",
+      "city": "Hyderabad",
+      "cuisine": "Thai",
+      "rating": 5.0,
+      "votes": 1178,
+      "cost_for_two": 827,
+      "cluster_label": "Premium Dining"
+    },
+    {
+      "name": "Express's Thai Hub",
+      "city": "Kolkata",
+      "cuisine": "Cafe",
+      "rating": 5.0,
+      "votes": 2185,
+      "cost_for_two": 923,
+      "cluster_label": "Hidden Gems"
+    },
+    {
+      "name": "Bistro's Fast Food Bites",
+      "city": "Ahmedabad",
+      "cuisine": "Street Food",
+      "rating": 5.0,
+      "votes": 4271,
+      "cost_for_two": 646,
+      "cluster_label": "Hidden Gems"
+    },
+    {
+      "name": "Classic's Mexican Spot",
+      "city": "Jaipur",
+      "cuisine": "Japanese",
+      "rating": 5.0,
+      "votes": 2878,
+      "cost_for_two": 967,
+      "cluster_label": "Premium Dining"
+    },
+    {
+      "name": "Flavors's South Indian Hub",
+      "city": "Bangalore",
+      "cuisine": "Desserts",
+      "rating": 5.0,
+      "votes": 543,
+      "cost_for_two": 1160,
+      "cluster_label": "Premium Dining"
+    },
+    {
+      "name": "Kitchen's Fast Food Eatery",
+      "city": "Ahmedabad",
+      "cuisine": "North Indian",
+      "rating": 5.0,
+      "votes": 1242,
+      "cost_for_two": 522,
+      "cluster_label": "Premium Dining"
+    },
+    {
+      "name": "Taste Tales",
+      "city": "Bangalore",
+      "cuisine": "Japanese",
+      "rating": 5.0,
+      "votes": 2044,
+      "cost_for_two": 1787,
+      "cluster_label": "Premium Dining"
+    },
+    {
+      "name": "Urban Junction",
+      "city": "Pune",
+      "cuisine": "North Indian",
+      "rating": 5.0,
+      "votes": 3987,
+      "cost_for_two": 627,
+      "cluster_label": "Hidden Gems"
+    }
+  ],
+  "sentiment_by_cluster": {
+    "Budget Favorites": {
+      "Negative": 87,
+      "Neutral": 29,
+      "Positive": 238
+    },
+    "Hidden Gems": {
+      "Negative": 58,
+      "Neutral": 46,
+      "Positive": 265
+    },
+    "Premium Dining": {
+      "Negative": 32,
+      "Neutral": 49,
+      "Positive": 330
+    },
+    "Quick Service": {
+      "Negative": 64,
+      "Neutral": 41,
+      "Positive": 261
+    }
+  }
+}
