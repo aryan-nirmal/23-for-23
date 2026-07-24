@@ -48,26 +48,7 @@ async function extractCurrentPage() {
           }
 
           function cleanLinkedInText(text: string): string {
-            let cleaned = text;
-            const footerMarkers = [
-              "Select language",
-              "Select Language",
-              "About Accessibility Talent Solutions",
-              "LinkedIn Corporation",
-              "providers you might be interested in",
-              "Recommendation transparency",
-              "Questions? Visit our Help Center",
-              "Manage your account and privacy",
-              "Showcase your services as a section"
-            ];
-
-            for (const marker of footerMarkers) {
-              const idx = cleaned.indexOf(marker);
-              if (idx !== -1) {
-                cleaned = cleaned.substring(0, idx);
-              }
-            }
-            return cleaned.trim();
+            return text.trim();
           }
 
           const isCompany = window.location.href.includes("/company/") || Boolean(document.querySelector(".org-top-card-summary__title, .org-top-card-summary-info-list"));

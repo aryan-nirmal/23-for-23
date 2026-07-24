@@ -104,7 +104,10 @@ export function extractLinkedInProfile(doc: Document = document): ProspectSnapsh
   const skills = extractSectionItems(["skill", "skills"]);
   const projects = extractSectionItems(["project", "projects", "honor", "award"]);
 
-  if (!fullName && !headline && !about && experiences.length === 0) {
+  const mainEl = doc.querySelector("main") || doc.querySelector("div.scaffold-layout__main") || doc.body;
+  const rawBodyText = compactText(mainEl?.innerText || mainEl?.textContent || "").slice(0, 15000);
+
+  if (!fullName && !headline && !about && experiences.length === 0 && !rawBodyText) {
     return null;
   }
 
@@ -118,6 +121,7 @@ export function extractLinkedInProfile(doc: Document = document): ProspectSnapsh
     certifications,
     education,
     skills,
-    projects
+    projects,
+    rawBodyText
   };
 }
