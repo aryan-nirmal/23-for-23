@@ -1,0 +1,216 @@
+:root {
+  color-scheme: light;
+  font-family: "IBM Plex Sans", "Avenir Next", "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(15, 118, 110, 0.14), transparent 24%),
+    radial-gradient(circle at top right, rgba(29, 78, 216, 0.1), transparent 18%),
+    linear-gradient(180deg, #f4f8fb 0%, #eef8f4 100%);
+  color: #14212d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+.shell {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 100vh;
+  padding: 18px;
+}
+
+.hero,
+.panel,
+.statusCard {
+  border: 1px solid rgba(20, 33, 45, 0.08);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 40px rgba(20, 33, 45, 0.08);
+}
+
+.hero {
+  padding: 18px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: #0f766e;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin: 0 0 10px;
+  font-family: "Iowan Old Style", "Georgia", serif;
+  font-size: 26px;
+  line-height: 1.1;
+}
+
+.subtle {
+  margin: 0;
+  color: #5e6975;
+}
+
+.panel {
+  padding: 16px;
+}
+
+.panelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.panelHeader h2,
+.panelHeader h3 {
+  margin: 0;
+}
+
+label {
+  display: block;
+  margin-bottom: 12px;
+  color: #324354;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+input,
+textarea {
+  width: 100%;
+  margin-top: 6px;
+  border: 1px solid rgba(50, 67, 84, 0.14);
+  border-radius: 14px;
+  background: #fffdf9;
+  padding: 12px 13px;
+  color: #152230;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 8px 0 0;
+}
+
+.primaryButton,
+.secondaryButton,
+.dangerButton {
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.primaryButton {
+  background: linear-gradient(135deg, #0f766e, #1d4ed8);
+  color: white;
+  padding: 11px 16px;
+}
+
+.secondaryButton {
+  background: #f0f4fa;
+  color: #203243;
+  padding: 11px 16px;
+}
+
+.dangerButton {
+  background: #fff1ef;
+  color: #b93828;
+  padding: 9px 14px;
+}
+
+.primaryButton:disabled,
+.secondaryButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.checklistItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(20, 33, 45, 0.08);
+  border-radius: 12px;
+  background: #fafcff;
+  padding: 10px 12px;
+}
+
+.checklistItem input[type="checkbox"] {
+  width: auto;
+  margin: 0;
+}
+
+.checklistItem span {
+  flex: 1;
+  color: #203243;
+  font-size: 14px;
+}
+
+.checklistItem span.done {
+  color: #647384;
+  text-decoration: line-through;
+}
+
+.checklistItem input[type="text"] {
+  flex: 1;
+  margin: 0;
+}
+
+.tabList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tabItem {
+  border-radius: 12px;
+  background: #f2f7ff;
+  padding: 10px 12px;
+}
+
+.tabItem strong {
+  display: block;
+  font-size: 13px;
+}
+
+.tabItem span {
+  color: #647384;
+  font-size: 11px;
+  word-break: break-all;
+}
+
+.footerStatus {
+  padding: 0 4px 18px;
+  color: #425466;
+  font-size: 13px;
+}
+
+.emptyState {
+  margin: 0;
+  color: #647384;
+}
