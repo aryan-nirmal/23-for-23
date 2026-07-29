@@ -203,3 +203,11 @@ body {
 .badge-glow-violet {
   box-shadow: 0 0 10px rgba(139, 92, 246, 0.2);
 }
+
+
+/* UI polish: Code container horizontal scroll configuration */
+pre, code {
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
