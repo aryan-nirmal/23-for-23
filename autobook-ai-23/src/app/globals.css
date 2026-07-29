@@ -167,3 +167,11 @@ body {
   cursor: not-allowed;
   pointer-events: none;
 }
+
+
+/* UI polish: Unified gap utilities for list cards */
+.list-gap-y {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
