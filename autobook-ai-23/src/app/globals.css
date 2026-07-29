@@ -35,3 +35,9 @@ body {
   background-color: rgba(139, 92, 246, 0.3);
   color: #ffffff;
 }
+
+
+/* UI polish: Enable smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
