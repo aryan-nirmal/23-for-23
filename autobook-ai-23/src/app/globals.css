@@ -115,3 +115,13 @@ body {
 .animate-fade-in {
   animation: fade-in 0.3s ease-out forwards;
 }
+
+
+/* UI polish: Border hover glow transition */
+.border-glow {
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.border-glow:hover {
+  border-color: rgba(139, 92, 246, 0.5);
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.15);
+}
