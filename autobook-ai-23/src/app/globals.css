@@ -62,3 +62,11 @@ body {
   backdrop-filter: blur(12px);
   border: 1px solid rgba(63, 63, 70, 0.4);
 }
+
+
+/* UI polish: AI gradient text helper */
+.text-gradient-purple {
+  background: linear-gradient(135deg, #a78bfa, #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
