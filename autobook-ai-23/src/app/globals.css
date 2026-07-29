@@ -47,3 +47,10 @@ html {
 *::-webkit-scrollbar-thumb:hover {
   background-color: #52525b;
 }
+
+
+/* UI polish: Font rendering optimization */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
