@@ -159,3 +159,11 @@ body {
   animation: shimmer 1.5s infinite;
   content: '';
 }
+
+
+/* UI polish: Disabled elements styling constraints */
+.disabled-state {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
