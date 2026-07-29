@@ -125,3 +125,12 @@ body {
   border-color: rgba(139, 92, 246, 0.5);
   box-shadow: 0 0 12px rgba(139, 92, 246, 0.15);
 }
+
+
+/* UI polish: Interactive button click shrink */
+.btn-tap-shrink {
+  transition: transform 0.1s ease;
+}
+.btn-tap-shrink:active {
+  transform: scale(0.97);
+}
