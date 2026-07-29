@@ -197,3 +197,9 @@ body {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
+
+
+/* UI polish: Custom badges glow highlights */
+.badge-glow-violet {
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.2);
+}
