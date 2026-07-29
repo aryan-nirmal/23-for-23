@@ -41,3 +41,9 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+
+/* UI polish: Scrollbar hover states */
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #52525b;
+}
