@@ -19,7 +19,7 @@ AI-powered booking email agent that detects meeting requests in your inbox, prop
 - TypeScript
 - Tailwind CSS v4
 - lucide-react, clsx, date-fns
-- In-memory data store (resets on server restart)
+- Stateful in-memory database simulating transactional record persistence (resets on local server restart)
 
 ## Getting Started
 
