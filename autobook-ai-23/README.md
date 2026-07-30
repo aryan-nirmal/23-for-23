@@ -40,7 +40,16 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## API Examples
 
+All endpoints operate on JSON request payloads and return unified JSON status structures.
+
 ### Propose slots
+
+**Request Payload:**
+```json
+{
+  "emailId": "string"
+}
+```
 
 ```bash
 curl -X POST http://localhost:3000/api/propose \
@@ -49,6 +58,14 @@ curl -X POST http://localhost:3000/api/propose \
 ```
 
 ### Confirm booking
+
+**Request Payload:**
+```json
+{
+  "emailId": "string",
+  "slotStart": "ISO-8601 string"
+}
+```
 
 ```bash
 curl -X POST http://localhost:3000/api/confirm \
