@@ -23,6 +23,12 @@ AI-powered booking email agent that detects meeting requests in your inbox, prop
 
 ## Getting Started
 
+### Prerequisites
+- Node.js v18.0.0 or higher
+- npm v9.0.0 or higher
+
+### Installation
+
 ```bash
 npm install
 npm run dev
