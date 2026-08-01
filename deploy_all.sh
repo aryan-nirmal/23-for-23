@@ -6,6 +6,14 @@ GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 NC='\033[0m' # No Color
 
+LOCKFILE="/tmp/vercel_deploy_all.lock"
+if [ -e "$LOCKFILE" ]; then
+    echo -e "${RED}Error: Another deployment process is currently running.${NC}"
+    exit 1
+fi
+touch "$LOCKFILE"
+trap 'rm -f "$LOCKFILE"' EXIT
+
 DRY_RUN=false
 for arg in "$@"; do
     if [ "$arg" == "--dry-run" ] || [ "$arg" == "-d" ]; then
