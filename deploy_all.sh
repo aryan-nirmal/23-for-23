@@ -35,7 +35,13 @@ if [ "$DRY_RUN" = true ]; then
     exit 0
 fi
 
-echo "Starting mass Vercel deployment..." > deploy_urls.txt
+# Prepare markdown report
+REPORT_FILE="deploy_report.md"
+echo "# Vercel Deployment Report" > "$REPORT_FILE"
+echo "Generated on: $(date)" >> "$REPORT_FILE"
+echo "" >> "$REPORT_FILE"
+echo "| Project Directory | Deployment Status | Info / Log URL |" >> "$REPORT_FILE"
+echo "|-------------------|-------------------|----------------|" >> "$REPORT_FILE"
 
 for dir in "${projects[@]}"; do
     if [ -d "$dir" ]; then
@@ -43,16 +49,17 @@ for dir in "${projects[@]}"; do
         cd "$dir"
         
         # Deploy using vercel CLI, capture output to parse the production URL
-        OUTPUT=$(npx vercel --prod --yes)
+        OUTPUT=$(npx vercel --prod --yes 2>&1)
         if [ $? -eq 0 ]; then
             echo -e "${GREEN}Deployment for $dir succeeded.${NC}"
+            echo "| $dir | 🟢 Success | [Vercel App]($OUTPUT) |" >> "../$REPORT_FILE"
         else
             echo -e "${RED}Deployment for $dir failed.${NC}"
+            echo "| $dir | 🔴 Failed | Build logs error |" >> "../$REPORT_FILE"
         fi
-        echo "$dir: $OUTPUT" >> ../deploy_urls.txt
         
         cd ..
     fi
 done
 
-echo -e "${GREEN}All deployments complete.${NC}"
+echo -e "${GREEN}All deployments complete. Report written to $REPORT_FILE.${NC}"
