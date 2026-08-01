@@ -6,17 +6,19 @@ GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 NC='\033[0m' # No Color
 
-projects=(
-    "micro-sme-invoice-manager-06"
-    "healthcare-dashboard-07"
-    "ai-copywriter-08"
-    "uptime-monitor-09"
-    "ada-compliance-checker-10"
-    "rent-agreement-generator-11"
-    "supplier-verification-smes-12"
-    "freelancer-payment-protection-13"
-    "freelanceos-14"
-)
+# Auto-detect Next.js directories in the workspace
+projects=()
+for d in *-[0-9][0-9]/; do
+    d=${d%/}
+    if [ -f "$d/package.json" ] && grep -q '"next"' "$d/package.json"; then
+        projects+=("$d")
+    fi
+done
+
+if [ ${#projects[@]} -eq 0 ]; then
+    echo -e "${RED}No Next.js projects detected in workspace root.${NC}"
+    exit 1
+fi
 
 echo "Starting mass Vercel deployment..." > deploy_urls.txt
 
@@ -35,8 +37,6 @@ for dir in "${projects[@]}"; do
         echo "$dir: $OUTPUT" >> ../deploy_urls.txt
         
         cd ..
-    else
-        echo -e "${RED}Directory $dir not found, skipping.${NC}"
     fi
 done
 
