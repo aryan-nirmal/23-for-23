@@ -6,6 +6,13 @@ GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 NC='\033[0m' # No Color
 
+DRY_RUN=false
+for arg in "$@"; do
+    if [ "$arg" == "--dry-run" ] || [ "$arg" == "-d" ]; then
+        DRY_RUN=true
+    fi
+done
+
 # Auto-detect Next.js directories in the workspace
 projects=()
 for d in *-[0-9][0-9]/; do
@@ -18,6 +25,14 @@ done
 if [ ${#projects[@]} -eq 0 ]; then
     echo -e "${RED}No Next.js projects detected in workspace root.${NC}"
     exit 1
+fi
+
+if [ "$DRY_RUN" = true ]; then
+    echo -e "${YELLOW}=== DRY RUN MODE ===${NC}"
+    for dir in "${projects[@]}"; do
+        echo -e "Would deploy: ${GREEN}$dir${NC}"
+    done
+    exit 0
 fi
 
 echo "Starting mass Vercel deployment..." > deploy_urls.txt
