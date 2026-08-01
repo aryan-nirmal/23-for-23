@@ -48,7 +48,7 @@ REPORT_FILE="deploy_report.md"
 echo "# Vercel Deployment Report" > "$REPORT_FILE"
 echo "Generated on: $(date)" >> "$REPORT_FILE"
 echo "" >> "$REPORT_FILE"
-echo "| Project Directory | Deployment Status | Info / Log URL |" >> "$REPORT_FILE"
+echo "| Project Directory | Deployment Status | Production URL |" >> "$REPORT_FILE"
 echo "|-------------------|-------------------|----------------|" >> "$REPORT_FILE"
 
 for dir in "${projects[@]}"; do
@@ -59,8 +59,12 @@ for dir in "${projects[@]}"; do
         # Deploy using vercel CLI, capture output to parse the production URL
         OUTPUT=$(npx vercel --prod --yes 2>&1)
         if [ $? -eq 0 ]; then
-            echo -e "${GREEN}Deployment for $dir succeeded.${NC}"
-            echo "| $dir | 🟢 Success | [Vercel App]($OUTPUT) |" >> "../$REPORT_FILE"
+            URL=$(echo "$OUTPUT" | grep -oE 'https://[a-zA-Z0-9-]+\.vercel\.app' | head -n 1)
+            if [ -z "$URL" ]; then
+                URL="Link parsed from logs unavailable"
+            fi
+            echo -e "${GREEN}Deployment for $dir succeeded: $URL${NC}"
+            echo "| $dir | 🟢 Success | [$URL]($URL) |" >> "../$REPORT_FILE"
         else
             echo -e "${RED}Deployment for $dir failed.${NC}"
             echo "| $dir | 🔴 Failed | Build logs error |" >> "../$REPORT_FILE"
