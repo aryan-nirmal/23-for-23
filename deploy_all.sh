@@ -21,10 +21,27 @@ for arg in "$@"; do
     fi
 done
 
+# Define list of directory patterns to exclude
+blacklist=("some-project-pattern-to-skip")
+
 # Auto-detect Next.js directories in the workspace
 projects=()
 for d in *-[0-9][0-9]/; do
     d=${d%/}
+    
+    # Check if in blacklist
+    skip=false
+    for pattern in "${blacklist[@]}"; do
+        if [[ "$d" == *"$pattern"* ]]; then
+            skip=true
+            break
+        fi
+    done
+    
+    if [ "$skip" = true ]; then
+        continue
+    fi
+
     if [ -f "$d/package.json" ] && grep -q '"next"' "$d/package.json"; then
         projects+=("$d")
     fi
