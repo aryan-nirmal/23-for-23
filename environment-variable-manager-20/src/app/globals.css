@@ -27,3 +27,10 @@ body {
   outline: 2px solid #10b981;
   outline-offset: 2px;
 }
+
+
+/* UI polish: Custom webkit scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #27272a transparent;
+}
