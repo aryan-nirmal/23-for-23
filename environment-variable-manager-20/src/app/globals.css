@@ -48,3 +48,13 @@ input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 100px #09090b inset !important;
   -webkit-text-fill-color: #fafafa !important;
 }
+
+
+/* UI polish: Interactive hover transition */
+.hover-lift {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s;
+}
+.hover-lift:hover {
+  transform: translateY(-2px);
+  border-color: rgba(16, 185, 129, 0.4);
+}
