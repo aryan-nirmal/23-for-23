@@ -21,3 +21,9 @@ body {
 ::selection {
   background: rgb(16 185 129 / 0.3);
 }
+
+/* UI polish: Focus-visible states */
+*:focus-visible {
+  outline: 2px solid #10b981;
+  outline-offset: 2px;
+}
