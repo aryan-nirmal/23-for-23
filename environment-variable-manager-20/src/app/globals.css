@@ -41,3 +41,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+
+/* UI polish: Form control autofill styles */
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 100px #09090b inset !important;
+  -webkit-text-fill-color: #fafafa !important;
+}
