@@ -64,3 +64,11 @@ input:-webkit-autofill {
 .shadow-card {
   box-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.6);
 }
+
+
+/* UI polish: Green text gradient */
+.text-gradient-green {
+  background: linear-gradient(135deg, #34d399, #059669);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
