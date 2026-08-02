@@ -34,3 +34,10 @@ body {
   scrollbar-width: thin;
   scrollbar-color: #27272a transparent;
 }
+
+
+/* UI polish: Text rendering optimization */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
