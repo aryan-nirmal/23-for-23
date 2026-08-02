@@ -98,3 +98,25 @@ input:-webkit-autofill {
 .transition-fast {
   transition: all 0.15s ease-in-out;
 }
+
+
+/* UI polish: Animated underline transitions */
+.underline-slide {
+  position: relative;
+}
+.underline-slide::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: currentColor;
+  transform-origin: bottom right;
+  transition: transform 0.2s ease-out;
+}
+.underline-slide:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
