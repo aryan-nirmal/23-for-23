@@ -72,3 +72,13 @@ input:-webkit-autofill {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+
+/* UI polish: Glowing indicators animation */
+@keyframes glow-pulse {
+  0%, 100% { opacity: 1; filter: drop-shadow(0 0 2px rgba(16, 185, 129, 0.4)); }
+  50% { opacity: 0.6; filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.8)); }
+}
+.animate-glow-pulse {
+  animation: glow-pulse 2s infinite ease-in-out;
+}
