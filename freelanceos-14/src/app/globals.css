@@ -83,3 +83,13 @@ input:-webkit-autofill {
 .animate-glow-pulse {
   animation: glow-pulse 2s infinite ease-in-out;
 }
+
+
+/* UI polish: Dashboard view entry transitions */
+@keyframes view-slide-up {
+  from { transform: translateY(12px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.animate-view-slide-up {
+  animation: view-slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
