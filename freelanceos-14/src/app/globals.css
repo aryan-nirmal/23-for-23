@@ -65,3 +65,11 @@ input:-webkit-autofill {
 .shadow-card {
   box-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.6);
 }
+
+
+/* UI polish: Violet-to-fuchsia text gradient */
+.text-gradient-violet {
+  background: linear-gradient(135deg, #a78bfa, #d946ef);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
