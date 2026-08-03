@@ -22,3 +22,9 @@ body {
   scrollbar-width: thin;
   scrollbar-color: #3f3f46 transparent;
 }
+
+/* UI polish: Focus-visible states */
+*:focus-visible {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 2px;
+}
