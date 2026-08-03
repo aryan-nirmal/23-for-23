@@ -49,3 +49,13 @@ input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 100px #18181b inset !important;
   -webkit-text-fill-color: #fafafa !important;
 }
+
+
+/* UI polish: Hover translation transitions */
+.hover-lift {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s;
+}
+.hover-lift:hover {
+  transform: translateY(-2px);
+  border-color: rgba(139, 92, 246, 0.4);
+}
