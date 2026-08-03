@@ -35,3 +35,10 @@ body {
   background-color: rgba(139, 92, 246, 0.3);
   color: #ffffff;
 }
+
+
+/* UI polish: Text rendering optimization */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
