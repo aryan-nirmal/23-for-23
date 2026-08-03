@@ -42,3 +42,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+
+/* UI polish: Form autofill background overrides */
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 100px #18181b inset !important;
+  -webkit-text-fill-color: #fafafa !important;
+}
