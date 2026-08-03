@@ -121,3 +121,11 @@ input:-webkit-autofill {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
+
+
+/* UI polish: Centered flexbox utility layout */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
