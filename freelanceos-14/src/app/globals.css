@@ -154,3 +154,12 @@ input:-webkit-autofill {
   animation: loading-shimmer 1.6s infinite;
   content: '';
 }
+
+
+/* UI polish: Active interactive buttons scale-down */
+.btn-press {
+  transition: transform 0.1s ease;
+}
+.btn-press:active {
+  transform: scale(0.96);
+}
