@@ -28,3 +28,10 @@ body {
   outline: 2px solid #8b5cf6;
   outline-offset: 2px;
 }
+
+
+/* UI polish: Custom selection highlights */
+::selection {
+  background-color: rgba(139, 92, 246, 0.3);
+  color: #ffffff;
+}
