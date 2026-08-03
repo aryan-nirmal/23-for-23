@@ -59,3 +59,9 @@ input:-webkit-autofill {
   transform: translateY(-2px);
   border-color: rgba(139, 92, 246, 0.4);
 }
+
+
+/* UI polish: Dashboard card elevation shadows */
+.shadow-card {
+  box-shadow: 0 4px 24px -2px rgba(0, 0, 0, 0.6);
+}
